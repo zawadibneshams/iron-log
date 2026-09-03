@@ -938,10 +938,73 @@
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
+
+  /* ---------- account / auth ---------- */
+  #accountToggle { display: none; }
+  .auth-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    padding: 20px;
+  }
+  .auth-screen.hidden { display: none; }
+  .auth-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 360px;
+    width: 100%;
+    padding: 26px 22px;
+  }
+  .auth-logo {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    text-align: center;
+    margin: 0 0 4px;
+  }
+  .auth-logo span { color: var(--accent); }
+  .auth-tagline {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 0 0 20px;
+  }
+  .auth-field { margin-bottom: 12px; }
+  .auth-field label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .auth-field input {
+    width: 100%;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 9px 10px;
+  }
+  .auth-field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .auth-msg { font-size: 12.5px; margin: 2px 0 12px; min-height: 15px; }
+  .auth-msg.err { color: var(--danger); }
+  .auth-msg.ok { color: var(--good); }
+  .auth-btns { display: flex; flex-direction: column; gap: 8px; }
+  .auth-btns .btn { width: 100%; }
+  .auth-loading { text-align: center; font-size: 12.5px; color: var(--muted); margin: 14px 0 0; }
 </style>
 </head>
 <body>
-
 
 <div class="wrap">
   <header id="header">
@@ -951,6 +1014,9 @@
         <div class="today" id="todayLabel"></div>
       </div>
       <div class="header-actions">
+        <button class="icon-btn" id="accountToggle" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
         <button class="icon-btn" id="dataToggle" aria-label="Backup and restore data">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </button>
@@ -1088,6 +1154,40 @@
   </button>
 </div>
 
+<div class="auth-screen hidden" id="authScreen">
+  <div class="auth-panel">
+    <h1 class="auth-logo">Iron <span>Log</span></h1>
+    <p class="auth-tagline">Sign in to sync your workouts everywhere.</p>
+    <div class="auth-field">
+      <label for="authEmail">Email</label>
+      <input type="email" id="authEmail" autocomplete="email" placeholder="you@example.com">
+    </div>
+    <div class="auth-field">
+      <label for="authPassword">Password</label>
+      <input type="password" id="authPassword" autocomplete="current-password" placeholder="At least 6 characters">
+    </div>
+    <p class="auth-msg" id="authMsg"></p>
+    <div class="auth-btns">
+      <button class="btn btn-primary" id="authSignInBtn">Sign in</button>
+      <button class="btn btn-ghost" id="authSignUpBtn">Create account</button>
+    </div>
+    <p class="auth-loading" id="authLoading" hidden>Loading your data…</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="accountModal">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3>Account</h3>
+      <button class="icon-btn" id="accountModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="modal-hint">Signed in as <strong id="accountEmail"></strong>. Your data syncs automatically across your devices.</p>
+    <button class="btn btn-ghost" id="signOutBtn" style="width:100%;">Log out</button>
+  </div>
+</div>
+
 <div class="modal-overlay" id="dataModal">
   <div class="modal-panel">
     <div class="modal-head">
@@ -1110,11 +1210,23 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 (function () {
   "use strict";
 
   var STORAGE_KEY = "iron-log-v1";
+
+  /* ---------- cloud sync (Supabase) ----------
+     Fill these in after creating your Supabase project (see setup guide).
+     Leaving them as-is runs the app in local-only mode, exactly as before. */
+  var SUPABASE_URL = "https://tmwkymqhshveoxgupstl.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_D2JMyFeuyNtY_BrT7Wwhjw_lVJJxTXM";
+  var cloud = (window.supabase && SUPABASE_URL.indexOf("YOUR_SUPABASE_URL") === -1)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+  var currentUser = null;
+  var cloudSaveTimer = null;
   var LB_PER_KG = 2.2046226218;
 
   var TYPE_LABEL = { push: "Push", pull: "Pull", legs: "Legs", rest: "Rest" };
@@ -1341,6 +1453,21 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (e) { /* best effort */ }
+    pushToCloud();
+  }
+
+  function pushToCloud() {
+    if (!cloud || !currentUser) return;
+    clearTimeout(cloudSaveTimer);
+    cloudSaveTimer = setTimeout(function () {
+      cloud.from("app_state").upsert({
+        user_id: currentUser.id,
+        state: state,
+        updated_at: new Date().toISOString()
+      }).then(function (res) {
+        if (res.error) { /* best effort — local copy is already saved */ }
+      });
+    }, 800);
   }
 
   var state = loadState();
@@ -2825,6 +2952,126 @@
     setTimeout(closeDataModal, 900);
   });
 
+  /* ---------- account / auth ---------- */
+
+  function showAuthMsg(text, isErr) {
+    var el = document.getElementById("authMsg");
+    el.textContent = text || "";
+    el.className = "auth-msg" + (isErr ? " err" : (text ? " ok" : ""));
+  }
+
+  function setAuthLoading(on) {
+    document.getElementById("authLoading").hidden = !on;
+    document.getElementById("authSignInBtn").disabled = on;
+    document.getElementById("authSignUpBtn").disabled = on;
+  }
+
+  function showAuthScreen() {
+    document.getElementById("authScreen").classList.remove("hidden");
+  }
+
+  function hideAuthScreen() {
+    document.getElementById("authScreen").classList.add("hidden");
+  }
+
+  function loadOrCreateCloudState(userId) {
+    return cloud.from("app_state").select("state").eq("user_id", userId).maybeSingle()
+      .then(function (res) {
+        if (res.error) throw res.error;
+        if (res.data && res.data.state) return normalizeState(res.data.state);
+        var fresh = normalizeState({});
+        return cloud.from("app_state").upsert({
+          user_id: userId,
+          state: fresh,
+          updated_at: new Date().toISOString()
+        }).then(function (up) {
+          if (up.error) throw up.error;
+          return fresh;
+        });
+      });
+  }
+
+  function onAuthed(user) {
+    currentUser = user;
+    document.getElementById("accountEmail").textContent = user.email || "";
+    setAuthLoading(true);
+    loadOrCreateCloudState(user.id).then(function (cloudState) {
+      state = cloudState;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+      renderAll();
+      hideAuthScreen();
+    }).catch(function () {
+      showAuthMsg("Couldn't load your data — check your connection and try again.", true);
+    }).then(function () {
+      setAuthLoading(false);
+    });
+  }
+
+  function initAuth() {
+    if (!cloud) return; // Supabase not configured yet — app stays in local-only mode.
+
+    document.getElementById("accountToggle").style.display = "grid";
+
+    document.getElementById("authSignInBtn").addEventListener("click", function () {
+      var email = document.getElementById("authEmail").value.trim();
+      var password = document.getElementById("authPassword").value;
+      if (!email || !password) { showAuthMsg("Enter your email and password.", true); return; }
+      setAuthLoading(true);
+      showAuthMsg("");
+      cloud.auth.signInWithPassword({ email: email, password: password }).then(function (res) {
+        setAuthLoading(false);
+        if (res.error) { showAuthMsg(res.error.message, true); return; }
+        onAuthed(res.data.user);
+      });
+    });
+
+    document.getElementById("authSignUpBtn").addEventListener("click", function () {
+      var email = document.getElementById("authEmail").value.trim();
+      var password = document.getElementById("authPassword").value;
+      if (!email || !password) { showAuthMsg("Enter your email and password.", true); return; }
+      if (password.length < 6) { showAuthMsg("Password must be at least 6 characters.", true); return; }
+      setAuthLoading(true);
+      showAuthMsg("");
+      cloud.auth.signUp({ email: email, password: password }).then(function (res) {
+        setAuthLoading(false);
+        if (res.error) { showAuthMsg(res.error.message, true); return; }
+        if (res.data.session && res.data.user) {
+          onAuthed(res.data.user);
+        } else {
+          showAuthMsg("Account created — check your email to confirm it, then sign in.", false);
+        }
+      });
+    });
+
+    document.getElementById("accountToggle").addEventListener("click", function () {
+      document.getElementById("accountModal").classList.add("open");
+    });
+    document.getElementById("accountModalClose").addEventListener("click", function () {
+      document.getElementById("accountModal").classList.remove("open");
+    });
+    document.getElementById("accountModal").addEventListener("click", function (e) {
+      if (e.target === this) this.classList.remove("open");
+    });
+    document.getElementById("signOutBtn").addEventListener("click", function () {
+      cloud.auth.signOut().then(function () {
+        currentUser = null;
+        document.getElementById("accountModal").classList.remove("open");
+        document.getElementById("authEmail").value = "";
+        document.getElementById("authPassword").value = "";
+        showAuthMsg("");
+        showAuthScreen();
+      });
+    });
+
+    showAuthScreen();
+    cloud.auth.getSession().then(function (res) {
+      var session = res.data && res.data.session;
+      if (session && session.user) {
+        onAuthed(session.user);
+      }
+    });
+  }
+
   /* ---------- boot ---------- */
 
   var header = document.getElementById("header");
@@ -2833,16 +3080,16 @@
   });
 
   renderAll();
+  initAuth();
 })();
 </script>
 
 <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js").catch(function () { /* offline support unavailable, app still works online */ });
-    });
-  }
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
 </script>
-
 </body>
 </html>
