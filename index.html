@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Iron Log</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Iron Log">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#FCFCF8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#060606" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAALz0lEQVR4nO3de6wU5RnH8fd539n7uQGCSpRiLXfQoyjRKLai9QIqkYppQ2yxStpiE1IvaUq1ibaxtk1qY6oN1GhFbU0takWBcqgXELReWrmLiKigqCic++7Zmfd9+segQdxnz1lgzg6c3yebGMmec3Znvjv7zuzsOzR27kAFUIqu9gOA+EIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIEIcIPK6vYcmQ0SObdn7aGZV/j7QOzRpIs3sWHGZ+yilrOtmfXUTh9amvdAaWD+VSJOikvdhpbr8gqdNTbq+/GOCqBltOrrau4KulJfWRKxKr7OuoIsU1WbqlWJmcX2JcZAiVqq1s/ms4edOPmnayMHjDBlFat9EWLFi5dht3rl+ybonVmxuqknVkiL0URWadHPn7sYhEy475cpxx5+aNKn91pfau8p42663mjY8tWz9kwmTTJiEY1fyF5J0AUBS1FnsvPmy38ycOLuHD+7hF++99fHrU4l0RU8JDglNuiXf8qNJN15/0S8SJtGTH1m2ftFNj8zyre8Zr+T2o/SA1GjTVmj5+WV3zJw42zprXeDYlblZF1hnZ5x57a3T7mwvtGkyB/VEoUJGm+bOPdec8+OfTvmlp73ABY5t2fVlAxdcMPbSu65aYF0g/doScWgy7YW2CSdOvHriddYFWmujPU26zM1oT2sduOA7Z1wzccR57YVWrdFHLyGigl/46qBhN06+zbFjxZ72NJmy68t42vOt//URF0w7bUZLZ7PRJQYYJeIgomLQNeXkaXv/VxiH7v9TikgpVjyl8Qrf+T38KTh4mkxnV8d5oydnEhlmF+6J9OwHNTNf2jjdM4ZLDTtK/CJml/CSw44erZQSRrulEREpGnb0qJSXKvnHICqkRhw7ttL9AE1EREMHfq0u02Cd/fLrGQfBjhyHfGuNOECEOEDU/eHzg6RJE5EwdmHHrswRuj6OFGmtpWEfs5MOXh0qEcYRjk/zfr7LL6hSYyUinUlmU16q24P8fZDRxrd+W77VCQsn6aUyyWxFewyViioOIgpskC92jhw8btxxpxhtlKLPn0dYSkdX26vbVn+wZ3ttpgF7N/vSZFrzLQ3Z/mcPP29AzUDFTLTvpxZKKbXlw41rtr+qSWeTNRE9jEjiINKBDQyZ26ffPe20GUmTlO65p+PTPyz71UOr5+dStegjpLVpy7ecP2bKLVN/d3z/oWXu+cymJbcsnLOn41NNkWw/oolDKd8W77pqwYVjpzJzmXeNfrkBt15+JzM/uGpefbYB7y+GTHuh7ezhk+Zf/ahSyjkrjciIaNKoiwd//7gZ8ya3FVqjOOp46PdWDJnWfNv5Y6ZcOHZqYH1Fymgj3Zxzjt1Nk287pmFwMShSNK+Aw4hj52lv7iV3KKUCF2h50WnSRVscOXjcd8/6YWs+MBF8XhHJrqxjnjR6MjMrovJFa61ZcW267vQTzuosdvT80O8RSZPO+/nhx44Zdsyo8COS8vf3tMfM5466KJ1Qzh36N+VIVgaRyqVqqLsy9mLFinOpGuzTKqWYXSaZ7flmgIgyyZynVRTn0ET1SrWVnDJIqpvTEPuUSgfmjsVxyUGKKo7Kx0d9fbRxwKL7ALxPv8dDeYgDRIgDRIgDRIgDRIgDRIgDRIgDRIgDRIgDRIgDRJGfYFwRTVpp6pvzOGgycft4KUZxGG3yxc6OYnvKy0R03ltssVJdfj7ppbQ28TnjKS5xkKI9HflvjBx/8cnTGodMSIdzxcRlKUWJFStlXbDxg7VL1z7etGFxfM6VjEscBb8w58Ibbr70Ds/E5SH1slO+MmHGmdf+ZeU9i9cudOzisP2o/poIz3qaOXF245DTlVLWBfKXoI5kzE6TmTlx9vgTzgisn/RS1X5EMYgj1Djk9PDlUnKiiD6BtFLKOTvuuFOr/VD2isuubDixRN8YZZSjtYn6S449F5c4qG+fd76v+JyCH5fHATEUlzjwvYTPxWdRxCUOIorPe20VxWQnNhSXXYPtu985vv/QcLqO+Lzp9iZWjpmN9nY27ziqdlBC/vZ5r6n+agjnn7h7+W8fWj0/nAWR+iRNxmjv+c1Ntzw2JyYvj+pvOcI3WMvBT/76g1feXjX11G+PGnxSKpHqO7u14eHzrR9vXrzmsQWr5jUOOc1ojxVXfQlUP46Q0aYmlX567cJFrz/av+aobr9DfIRh5t0dn1gXeNqkYzM/eFzWATM7dv0zAwJr88XO+IzYe002mTPatOZb4jMwj0scIeusY2vIxGAs1LtYOXYqLlXsFa84QhzJfAJQsb72CoUKIA4QIQ4QIQ4QIQ4QIQ4QIQ4QIQ4QIQ4QIQ4QIQ4QxWWS2qqfuxAf8ZnfN5I4mJXv/IqmaQ6cH8UjOQxR4IKen7HAzNb5EZ3gEM3E+Eq9uOU5It3tqQnhUvBt8X/vvpxJZuJzKkNVOHaZZGbLh5ve3/Ne+evUhKyzRPTy2y90FtXhcUkNx7Y2U/P0moVrt7+WMInABdYF1gXBPjf72Y3ZGW3uW/HHrR+/mU5k+uA5Pvsx2rQVWu9quj08ndbKSy+wQcIkPmn76P6Vd+dSpqIrEfTQoY+DldKk/aB43YIZL21d4WnPaM9oz9vnZj67aW0eeOFPv//XbTXpuiiuGHLYsc7WZer/8cqDty/6WVfQZeSl5xnvrY/emHX/9J3NO1KeF8XrKpKTfRy7bDL3ceuH19x7+Tkjvzl+6JmlLgDI7YW2FZubXnvnpWwyp4mw2Qg5drXpuvnP3bly8/JzR188sHaQ+uIoNVx6G99f+8ymJS2de+qz/Xa1fRTFI4nqTDDHLp1IO3ZL1/3z6dcXhv/4+cqnz/6T9FK16XrG1WW/yLFryPbbuuvNDcvXKGb1xSuvhktPa5NL1eTStdFN9hLhaYLh6LI+0xA+nf32t8Jny+xwGZ6SrLOZRCabzClh0SnFzjnnbHSTVkR+Dml8JjE67Dh2qqq7bzhCCqIycRzwIACjh6roxQsAEh3gQRVMw1IV+sDXl3gRzxIrkkgH1t+xexszV9QjMzPzjt3vFm0RifQq5nc/2VrpDzlmZt7Z/H57oU1r8+UvC5VYhaxYa7Ns/SIiqmgHk5mJaNm6J7UifC2p1zh26UTm2U1LHTtVyZJndkS0fMNTBT9f8nv9Jf7JOVuXrn9m45KmDYs84/nWd85yWY6tb4ueSazY3LR03RO16QaHnZTewuyyqdy6Hf99YOU9RhtrA9v9+nK+9T2TePPDDQ+v/nNdpqHkTmXpjT8rTiXSN/xt1vNvLEuYhO5uzgxNJmGSq7Y8O+fhmQmTUITNRq+yztam63/91Ny/v/yAZxLdznGiSSdM4o2d62fdd2XBzxttSo4faOzcgSX/nibtW9+xnT7he1NO/taJg4ZrMvtPOc2KFTt223ZtWbL28Uf+c79SKmmSffzD1aogIsecL3Zc0njFtPEzRhw7JmGSX54iPBxH7tj93r83Ln5o9bz2rvZMMitt5sU4wr/HrFrzzUkv2S83QBrTsuLmjt1dQVddpp7wEUn1kCIias23aK375QYYef+lJd/cWeyoTdd52ivzSi53hDRczf1y/Zm5o9BWZp2nk9lsKhe+1fXkaUAUWDEz12cbmLn8HCdJk0znMs7Z8tv47g+fh0OV8gfwmZ1FFfGwd32RKXP2ICu2Luj2V/X0sxXsmh5eDsn6wqEqECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOECEOEP0fsVgl6qyK+EwAAAAASUVORK5CYII=">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIklyb24gTG9nIiwgInNob3J0X25hbWUiOiAiSXJvbiBMb2ciLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiI0ZDRkNGOCIsICJ0aGVtZV9jb2xvciI6ICIjMkM3QTE1IiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBZ0FBQUFJQUNBSUFBQUI3R2tPdEFBQVg0a2xFUVZSNG5PM2RlYlJ1WlgzWThlZlplNzludlBNRmdsUnI0Z3JnY3FoR3ZhWmhsRWxqeEtZVlRTcGdqQVpiUkYyU1pLbXA3V282ckt3TXk2aGROU3FXb21qQUFVelNTRVdMZ0RJS1dMeFVLd1ZSS2hvTTA3MzMzT0VNOTMzM2Z2ckhJU1pWTWVoOXozbmZlMzZmeitJZjdsbHI3K2VjczUvbisrN2hQVzkreHRzUFRRREVVNDE2QUFDTWhnQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUWxBQUFCQ1VBQUVFSkFFQlFBZ0FRbEFBQUJDVUFBRUVKQUVCUUFnQVFsQUFBQkNVQUFFRUpBRUJRQWdBUVZMTnFlOG9wcDV6cVhBOTl5MTBwcFhRbGxhRnZHZUFIclpuVmJEVUNVRlYxVG5uL1lLbWtzbVB4a1ZTRy9MMU45cWFtZXROVnJwcTYxM2FETXV6dEF5eGJZNnZaeWdhZ3J1cFN5cDZGdVVIYlAzempFWk85NlhOUCt1MWVQVEdzN1pmVTVWVGRjZDl0dDM3emhuN2JmMkR1L2sweld5YWJ5YlpyblJBQVE3UW1WN01WREVDdm5waWIzNUZTUHZYcEw5bjJNOGVlc2Uyc3FkN016TVRzU3V4cjk4S3VyMzVuK3cxM1gzM0Y5c3Z2ZmZqcm0yWTIxMVd2N1FZcnNTOGdtclc2bXVWbnZQM1E0VzgwVjZtVUIzYy8rS0pubm43T2llY2ZmL1FwMy92U1lBVytqYWI2MjR6dG10OTU2YzBYdnYrYWQreGUyTFY1ZHV0SzdBNklZMjJ2WnNNUFFKWHIvWVBGaVdieWRTODQvdzJudkRYbnFwVFNscmJPOWFPM1RsWkFLYVdrcml0bCtjZDM4ejNYdmUvcVAvckNYZjlqeTdwREIyMS9KZllJckhscmZqVWJjZ0NxWEEvYS9XM1hmdUMxbDUxdzlHbGQ2VW9wZFRYOGUrV1BwYVRTZG9PbTZxVlV6djNRSzYvWWZ0bGhHdzd2YXdEd1k0cXdtZzN6SGtDVnEvMkR4YTZVQzMvams4Y2ZkY3IrZHY5RVBiRXlqWHhNT2VXbTZyWGRJT2ZxdmErK05LVjB4ZmJMRGxsM1dGdmFWUjBIY0RBTHNwb05MUUE1NVZKS3I1bjRrMSs3OVBpalRobDBnNG5oM1IvL2NkVlYwNVV1cC96ZVYxK1NjLzdjLzc1aWRtS2RCZ0NQUjV6VmJHanZCRzdxNXNIZEQ3Nys1TGNzMS9MdjNzb1lpU3BYSlpVcTErOCs4NklOMDV1VzJzVVZ1bUFIckRGeFZyUGhCS0RPOWR6OHpoYys4L1JYSC9mNlFUZm8xYjJoYlBZQVZibHFTenZSbS9yalYxNDRhQWM1Q3dEdzl3aTFtZzBuQUNXVkxxVTN2L0R0TXhPek9lZnhlYTFkNTdxVThvS252dWk0bzA3ZHZiQnJKZDY2RGF3bG9WYXpJUVNnenZXZXhia1hQZU9mUFBlbmYrSFJCNlRHU1VtbGxQTEdVOTQ2MlV4MWJnTUFqeTNhYWphRUFPU2MrMjMvbUNOUEtxV000ZC9ocVhLVmMzN1dQM3p1NFp1ZTJHLzc0OU56WU54RVc4ME9OQURMZnhmcDhJMVBQUDNaTDhzNXIrWkRzbzlUVG5uUURhcGMvL0p6Zm5YUDR1NHhIQ0V3RGdLdVprTTRBK2hLTjlXYm51N05IUGltVms1VjFSdW1Ocm9QRFB3STBWYXpBdzFBWGRWN0YvZThmTnZaVTcyWlFUY1l6d3NzeTUwOFk5dFpSMng2MHRMQTg2REFEeEZ3TlJ2Q0dVQkpaYUtaR3Y4WDF4UE5WTTQrQVExNFRORldzeUU5QmxxNm9XeG5SUjBVZ3dSRzY2QllLSVkxU0srSUFZSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSnFSajJBOFRXc3Z3WmUwdGg5c0J3Y0ZNekJsU1lBUDBSVjFWWEtTNE9sZEtESFRVNnAxRlhUMUwyMkc0emhSNHpDZURJSFY0Y0EvSzJjY2xWVi9iYS9iMkZ2diswZnNlbUpPVmNwbGZTVHZ3d3BLZVhkQzdzZTJmdlFwcG5OVGRXcnFxcnQybUVPR3RZUWMzQ1ZDY0NqcWx5MVhidDczNjVOTTF1T2ZmcEx0ajNsdURPZWQ5WmtNM2tnaDE1WFNzNzVqdnUrZE1QZFYzLzZqajk3Y1BkM0Z4Y1hOODFzSG5TRFlRNGQxZ1J6Y1BVSlFFb3AxVlU5djdSdmFtTG1iYWYvM3E4OC85VmIxeDA2eEkwZmUrUkp4eDU1MGh0T2Zkc2Q5MzNwZ212ZitmazdQN3RsZG11WE9tZWo4RDNtNEVnSVFLcHp2VzlwNzhicFRlODg4NE1uSEgxcVNxbWswblp0bmVzRHZRVlZVc3FwbEs0clpkM2srbU9QUE9tWW56M3hEUjgrK3pOZitZdVppZG02cXJ1RDRjUG5ZS1daZzZNUy9USFFwbXAyemo5eTJ0TmZldTIvK3VvSlI1ODY2QWFsbEp4eVV6VTU1NXdPN0wrY2M4cFZycHVxV1Q2Z1MwcnZmZldsRjc3MmsyM1h0bDA3ckljYzRPQmxEbzVRNkFBMFZUTzNzUFA0bzA5N3o2cytzbjVxWTl1MXk4ZmNTdXdycDF4WGRaV3J0clFuUCszRjcvLzFqKzNidjdmS29YLytZQTZPVnR4dlBxZmNiL3ROUGZGYnYvaHZxNm9lZElPNnFsZGh2MVd1QnQzZ3hLZSs4UFJudjJMSHZvZWJ5bFU0Z2pJSFJ5NXdBSEphNk05ZitOckxuL1BrbjI5THUyb0h3ZkxMa0xZYnZQdk1pMDU4Nm92bUZuYldlVFVPZWhnMzV1RElCUTFBbmVzOWk3dFBlL3BMVHpqNnRFRTNXT1ZmZjA0NTVWeFh6VysrNk4vMDZzbXVlQ3FaY016QmNSQTBBRG5uUWRzZWUrUkpvM29Pck1wVlNlVWZQZWs1UjJ4K1VyL3RCNzhUUlVEbTREaUlHSUNjOC81Mi8rYlpyYi8wckgrV2MxNmR5NDdmUDRhVTI2NnRjdjJMei96bDNRdTdSaklHR0pXY3pNR3hFREVBVmE0Vzk4Ly80NTg5WWVQMDVxNTBveXAvenJtcTZoT09QbTNqekpiVyt4S0p4QndjRXhFRGtITmU3Qy8rL0ZPT2ErcmVDTjhHc3Z6ODJiYW5ITE5wZG11L0Mzb0dTa3hqT2dkWDV2SFRjUll4QUNtbG5QUDgvdmxSanlLbGxCYjJ6N2Zkd09wUE5PYmdPQWdhZ1BRMzhSKzVLbGN4anp3d0IwZHVMSDRCQUt3K0FRQUlTZ0FBZ2hJQWdLQUVBQ0FvQVFBSVNnQUFnaElBZ0tBRUFDQW9BUUFJU2dBQWdoSUFnS0FFQUNBb0FRQUlTZ0FBZ2hJQWdLQUVBQ0FvQVFBSVNnQUFnaElBZ0tBRUFDQW9BUUFJU2dBQWdoSUFnS0FFQUNBb0FRQUlTZ0FBZ2hJQWdLQUVBQ0FvQVFBSVNnQUFnaElBZ0tBRUFDQW9BUUFJU2dBQWdoSUFnS0FFQUNBb0FRQUlTZ0FBZ2hJQWdLQUVBQ0FvQVFBSXFobjFBUGhSY3NvcHB6clhveDRJL05pNlVrcnBTaXFqSGdpUFNRREdWRlhWT2VYOWc2V1N5bzdGUjFJeGl6aklUUGFtcG5yVFZhNmF1dGQyZytJWUhqOENNSGJxcWk2bDdGbVlHN1Q5d3pjZU1kbWJQdmVrMys3VkU2TWVGenhlSlhVNVZYZmNkOXV0Mzd5aDMvWWZtTHQvMDh5V3lXYXlMYTBNakJVQkdDTTU1NXp5N29XNW5QS3BUMy9KdHA4NTlveHRaMDMxWm1ZbVprYzlOUGhKN0Y3WTlkWHZiTC9oN3F1djJIN1p2US9mczI1eXcwUXoyWlYyMU9QaVVRSXdMcHFxMmQvdVgrb3ZubkQwYWI5eHdwdU9QL3JVNzMxcDBBMUdPREQ0eVRSVnMyRjYwekZIdnVDWUkxL3dMMC8rclV0dXV2Q1Ntejd3d083N04weHZjbDlnVEFqQVdHaXFadGZDam9sbThvTFhmT0xrcDcwNHBWUkthVXRiNXpybDFGUitUUnlVU2lrbGRWMHBHNmMzbjNmS1c4NCs1blcvYzlsNWw5MzYwU2R0K1FjNTUxR1BEbytCam9HNnFuZnNlK1M0bzA3OTBPdis4dVNudmJnclhWZmFuSE5UTmNzWGhVWTlRUGdKNVp5clhEZFZVMG9aZFAwTjA1dis4OWtmL3QxLytnYzU1NlZCVzJYcno0aDVhVGxpVmE3bmwvYiswck5lOW9IWFhKWlNhcnUycmp6MHlWcVRjMjV5cjVTU2MvWEdVOS8ybkNjLy8xZmYrMUpQaUk2Y0FJellZbjloL2ZUR2Q1MzFvWlRTb0J1NDJzTWF0bnhHdXpSWVBPYklrODQ5K1ExL1BmZFhveDVSZEphYkVhdXI1bDFuWGpUVG0rbEtaL1VuZ29sbXNpdmR1U2U5NWI1SHZwbFNjaUZvaEt3NEk3TjhjWC9EOU1ibi92UXZmTzkvWWMzTEtlZWN0NjQ3Wk91NlE1SUFqSlFmL2NpVnJuU2pIZ09zdGxJYythUG5ER0RrY3VWNU9PTHhoTnM0Y0FZQUVKUUFBQVFsQUFCQkNRQkFVQUlBRUpRQUFBUWxBQUJCQ1FCQVVBSUFFSlFBQUFRbEFBQkJDUUJBVUFJQUVKUUFBQVFsQU1BSWxPSURnVWRQQUVhczdkcjA2R1F3SDRpajVKeTdyaDMxTUtJVGdKRXBxYVNVZHV4NytPMlh2ekhuM0hadDBRQUNHSFNEbFBJMWQxNTV3ZWZmbFZKcXU4R29SeFNYQUl6WXpNUzZUOTMrOFd1K2RtVmROVDRoanpXdjdkcW1ha29wZjN6bGY5eTlzQ3M1OHgwcEFSaXhuTXJNMVBwelAvVFByNzN6TTNXdXU5SzF6b3RaaTBvcWcyNVFWL1dleGJrM1gvTHIxOTExOCtiWnJhTWVWSFFDTUdJbGxUclhkVldmYzlFWjUxMThaazZwcnVxdWRGM3BYQkZpYlNpbERMcEJUcm1wbXV2dSt0eEp2LytNcTc3NnFjMnp6YUIxOFdmRWZDajg2SFdscTZxOG9iZnhpdTJYNzF2YWM4Nko1eDkvOUNuTFgycTdRVW1wenJWUHorWmdVbExLcVpUU2RXMVQ5M0xPVFc3bUZuWmVjdE4vZWYrMTcxemNQNzloZXVPZXhibFJqeElCR0ErbGxMWnJ0NjQ3NUlhN3I3N3g2OWNlZDlRcDU1ejQ1bWMvZWR1NnlmV2pIaHI4K0hKS0tlV2NxN3BLS1QyeTk2RlAzSHJ4bjk1NHdYMDc3dDAwdlhsNllzWjF6akVoQUdOazBBM1dUMjhzcFh6aC8zejJsbTljZCtqNncxLzJ2RE5ucHphOGZOdlpFL1ZFU1U0RE9EaDBwVlE1Zi9sYnQ5NTI3NDEzZi9mT20rNjVkbTUrNS9URXpDSHJEbXU3dGl0ZGxWMThIZ3NDTUY2V1h4bHRuTm5jZGQxRGV4NTR4NVgvTHVmcXdzKy9PK2ZxMGZOcU9BaVVsUEx1aFYwNzUzZk1UTXhNOWFZM3pXN3BTamZ3eE9lWUVZQnh0SnlCWHRNN2RQMVBwWlQyTE83MnNCd0hsWnhTcWF2bUNSdVBhTHUySzhVMW4vRWtBT09ybERJb2c1UlNVL2sxY2ZBcHFmVGIvcWhId1k5aVpUa0llQjRVV0FsdXhRQUVKUUFBUVFrQVFGQUNBQkNVQUFBRUpRQUFRUWtBUUZBQ0FCQ1VBQUFFSlFBQVFRa0FRRkFDQUJDVUFBQUVKUUFBUVFrQVFGQUNBQkNVQUFBRUpRQUFRUWtBUUZBQ0FCQ1VBQUFFSlFBQVFRa0FRRkFDQUJDVUFBQUVKUUFBUVFrQVFGQUNBQkNVQUFBRUpRQUFRUWtBUUZBQ0FCQ1VBQUFFSlFBQVFRa0FRRkFDQUJDVUFBQUVKUUFBUVFrQVFGQUNBQkNVQUFBRUpRQUFRY1VOUU01ajhiMlB5VEJnOVkzSndUOG13eGlKb045NXpubXB2OWgxN2FnSGtoYjc4NldVVVk4Q1ZwczVPQTRpQnFEdDJuV1Q2Ly84OWt0TEtrM1ZsRFNhMzMzYnRTbWwvNzc5ei81cTUzMlR6ZFNvaGdHcmIwem5ZTHdNUkF4QUthVlg5eDZZdS8vV2I5NlFVdXBLTjVKaFZMa2F0UDNyNzc1Nm9wa0llT1FSV1VubTRGaUlHSUNVVWwwMWV4WjJYWC9YTmFXVWtSeDh5eTk1OWk3dHZ1VWIxODlNekl4cUFzQ29tSVBqSUdnQTJxN2RPTFA1TDdkL2ZQOWdzVmYxVnY4TXRPM2FLbGNmdStYaVhmTTdtbm9FQTREUk1nZkhRZEFBbEZSNjljUjNkMzNuTno5Nnp2eitmVzNYcnVhdnZ5MXRuZXZyN3JycXZWZi8wZnFwRFYwWDhhVUh3Wm1ENHlCb0FGSktYZWsyVG0yNjdKWkxMNzdoZlUzVjdCOHNyYzUrQjkyZ3p2WCtkdW44UzE2NzFKK3ZxenJtU3c4d0IwY3ViZ0JTU29OdThJUk5oNzN2bW5kY2Q5ZFZrODFVVjdxVnZoSFVkdTN5TXcvblgvS2F2WXU3cG51ek1hODh3akp6Y0xSQ0I2Q2trblBlMzE5ODAwZGU5WjdQL1dFcFhjNjUzL2E3WVorTmxsSUczYUFyWFYzVlgvekdkYjkyd1VzL2ZjY25aeWJXdFdYMEQwSERDSm1EbzlXTWVnQWoxcFZ1b2pkVlN2bjNmL0U3WDd2L2p0OS94Wjlzbk42OC9LVzJHd3psQUd5cUp1ZmM1Q2FsZE0zWHJqenZ3NjljNmk5dG1UMWswQTJHc1hrNHVKbURJeFE5QUNtbFVycWM4cE8ySFBIWnIveTNyMzc3OXROLzdoWEhIbm55enozNStUTVRzOFBheGNON0h2anoyejkyMnpkdnVQcHJuNTd1elV6UHpEank0SHZNd1ZFUmdKUlNLcW4wMi82NnlmVVA3MzNvUDMzMjl6NTQzWHNPV2Y5VEw5LzJxbDQ5Y1dDYjdYS3E3dmoybDI2NTU3cWQ4enZxcWw0M3RTR2w0c2lENzJNT2pvUUEvSzJ1ZEUzZEhMYnhDVzA3ZUhqdmcrKzQ4bmVIY2o5cXNqYzExWnZlUEx1MXBESU9mL2tFeHBZNXVNb0U0UDlUU2htMC9aUlNyKzRkc3U2d29XeXpLNlVyWGVzVkJ6d081dUJxRW9BZnJwUXlLQTRYR0JsemNCV0VmZ3dVSURJQkFBaEtBQUNDRWdDQW9BUUFJQ2dCQUFoS0FBQ0NFZ0NBb0FRQUlDZ0JBQWhLQUFDQ0VnQ0FvQVFBSUtqaEJPQ2crRlRscm5URC9aUlJZTzBKdFpvTklRQ2xsQ0YrY3R2S21abVlyWE9qQWNCamliYWFIV2dBdXRKTlRVeC84UnZYTGZVWHExeU41L0s2L0tGQ045L3poVjN6anpSVmJ6d0hDWXhXd05Yc1FBTlFTcGxxcHY3bi83MjVycW9xaitrZGhiYTBLYVgvOWUzYmQrN2IwYXQ2b3g0T01JNENybVpEK0NhcnFsN3FMOTUyNzgxcFhDK2YxYmtldFAydmZPZjJtY21aNVI4ZndBK0t0cG9kOEJsQUtrM1YyN0h2NGV2ditsejZtOU9Uc1ZKU3FYSzFkMm5QVFYvLy9IUnZlZ3hIQ0l5RGdLdlpFTTRBMm02d2FXYnpwN1pmUHJld2N3d3ZuTFZkVzByNTZCY3ZtcHZmMGRSdUFBQ1BLZHBxTm95bmdGS1piS2J1ZmVqdWozN3hnMVd1Mm02TXJyR1VWT3BjTFEwV1BuemorNmNuWjdwdUhNL3BnREVSYlRVYnpvMk90bXMzejI1NXoxVi9jUHUzYm1tcVpueCthbTNYNWx5OTllT3ZmM0R1L3NsNmN0eDZEb3liVUt2WmNBSlFVcW1yWnUvUzNEcy84eCs2MHVhY3grSCt5YURyTjFWejNWMVhmZXJMbjVpZFd0K093WkNBTVJkcU5SdmFvMDV0MTI2ZTJYcjlYVmVkZC9GWkthV2NSdnhURzNTRHB1cGRmL2ZWLytLRHI1aWRYT2VsUC9BNHhWbk5odm1zNjZBYmJKMDk5SXJ0bDUxMzhabWxkS082Z2xaUzZVclhWTTMxZDMvdW5QOTZScDNydXFwZC9BRWV2eUNyMlpEZjdORHYrb2R0T1B5SzdaZTk4U092MnJNd3R6eldyclNycy82V1VnYmRJS2RjNWVxYU82OTgzVVd2YUtxNnFTZkc0UXdPT0xoRVdNM3lNOTUrNkJBM3Q2eXU2bjFMZXpmTmJQbkRYM24veVU5NzhmSS90dDJncEZUbk91WGg3YW1rbEZNcHBldmFwbjcwVFhGekN6di85ZVZ2K3ZRZG41eVpXRmRYdGRVZitJbXQ3ZFZzUlFLUVVxcXJlcW0vT0dnSHh4NTEwamtubnYvc0oyOWJON2wrSlhiMGR6Mnk5NkZQM0hyeG45NTR3Vi92dm45MmNsMGF5N2R5QUFlWE5ieWFyVlFBVWtvNTU1enk3b1c1cWQ3VW9lc1BmOW56enB5ZDJ2RHliV2RQMUJNbERTZWNYU2xWemwvKzFxMjMzWHZqM2QrOTg2WjdycDJiM3prOU1UUFJUSFgrNUFNd0pHdDFOVnZCQUN5cnE3cnJ1bjdiMzdNNGwzTjF4S1luNWx3OWVyWXpCQ1dsdkh0aDE4NzVIVE1UTTFPOTZWN2Q2MHJuaFQ4d2RHdHZOVnZ4QUR5Nm01enJYS2VVbGdaTGFaaTNVSEpLcGE2YVh0MXJ1N1lyWmFnYkIvaCthMmsxYTFaNkI4dEtLWU15U0NrMTFmRDNXRkxwdC8yaGJ4YmdCNjJsMVd5VkF2QTluc2NIMW9ZMXNKcU42WWNlQUxEU0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUlTQUlDZ0JBQWdLQUVBQ0VvQUFJSVNBSUNnQkFBZ0tBRUFDRW9BQUlJU0FJQ2dCQUFnS0FFQUNFb0FBSUw2ZnpRcVc0MENyclFpQUFBQUFFbEZUa1N1UW1DQyIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn1dfQ==">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --paper: #FCFCF8;
+    --surface: #FFFFFF;
+    --surface-2: #EEF3E7;
+    --ink: #14170F;
+    --ink-soft: #4B5142;
+    --muted: #848B78;
+    --line: #E2E7D8;
+    --accent: #2C7A15;
+    --accent-ink: #FFFFFF;
+    --good: #2E6FA3;
+    --good-bg: #E1EBF4;
+    --danger: #B23A2E;
+    --vital: #A22B47;
+    --vital-bg: #F5DEE3;
+    --stat-bg: #FFFFFF;
+    --stat-fg: #14170F;
+    --stat-fg-soft: #848B78;
+    --stat-line: #E2E7D8;
+    --accent-glow: rgba(44,122,21,0.3);
+    --radius: 12px;
+    --shadow: 0 1px 2px rgba(20,23,15,0.08), 0 6px 16px rgba(20,23,15,0.06);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #060606;
+      --surface: #131313;
+      --surface-2: #1C1C1C;
+      --ink: #F2F2EA;
+      --ink-soft: #B7B7AE;
+      --muted: #6E6E67;
+      --line: #262626;
+      --accent: #C3FF3D;
+      --accent-ink: #0B1A02;
+      --good: #4CD97B;
+      --good-bg: rgba(76,217,123,0.14);
+      --danger: #FF5C4D;
+      --vital: #FF3D8A;
+      --vital-bg: rgba(255,61,138,0.14);
+      --stat-bg: #141414;
+      --stat-fg: #F2F2EA;
+      --stat-fg-soft: rgba(242,242,234,0.5);
+      --stat-line: rgba(242,242,234,0.1);
+      --accent-glow: rgba(195,255,61,0.3);
+      --shadow: 0 1px 2px rgba(0,0,0,0.6), 0 10px 28px rgba(0,0,0,0.5);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #060606;
+    --surface: #131313;
+    --surface-2: #1C1C1C;
+    --ink: #F2F2EA;
+    --ink-soft: #B7B7AE;
+    --muted: #6E6E67;
+    --line: #262626;
+    --accent: #C3FF3D;
+    --accent-ink: #0B1A02;
+    --good: #4CD97B;
+    --good-bg: rgba(76,217,123,0.14);
+    --danger: #FF5C4D;
+    --vital: #FF3D8A;
+    --vital-bg: rgba(255,61,138,0.14);
+    --stat-bg: #141414;
+    --stat-fg: #F2F2EA;
+    --stat-fg-soft: rgba(242,242,234,0.5);
+    --stat-line: rgba(242,242,234,0.1);
+    --accent-glow: rgba(195,255,61,0.3);
+    --shadow: 0 1px 2px rgba(0,0,0,0.6), 0 10px 28px rgba(0,0,0,0.5);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    margin: 0;
+  }
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 18px 96px;
+  }
+  a { color: inherit; }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 20px 0 12px;
+    z-index: 5;
+    border-bottom: 1px solid transparent;
+  }
+  header.stuck { border-bottom-color: var(--line); }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  h1 {
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 38px;
+    letter-spacing: 0.01em;
+    margin: 0;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  h1 span { color: var(--accent); }
+  .today {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: none;
+    padding-top: 1px;
+  }
+  .icon-btn {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex: none;
+  }
+  .icon-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .icon-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .icon-btn svg { width: 15px; height: 15px; }
+  .timer-open-btn {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+    border-radius: 50%;
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--surface);
+  }
+  .timer-open-btn:hover { background: var(--surface-2); }
+  .timer-open-btn svg { width: 30px; height: 30px; }
+  .unit-toggle {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-radius: 8px;
+    height: 30px;
+    padding: 0 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 11.5px;
+    cursor: pointer;
+    flex: none;
+  }
+  .unit-toggle:hover { color: var(--ink); border-color: var(--muted); }
+
+  /* ---------- stats ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 16px 0 16px;
+    background: var(--stat-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .stat {
+    background: transparent;
+    border-right: 1px solid var(--stat-line);
+    padding: 11px 8px;
+    min-width: 0;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 16.5px;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--stat-fg);
+  }
+  .stat-label {
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--stat-fg-soft);
+    font-weight: 600;
+    margin-top: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #statCalories { color: var(--accent); }
+  #statStreak { color: var(--vital); }
+
+  /* ---------- program row ---------- */
+  .program-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .program-row::-webkit-scrollbar { display: none; }
+  .program-pill {
+    flex: none;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .program-pill:hover { border-color: var(--muted); }
+  .program-pill.active { border-color: var(--accent); color: var(--accent); }
+  .program-pill-add { border-style: dashed; color: var(--muted); }
+  .program-edit-row {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .program-rename {
+    flex: 1;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 7px 9px;
+  }
+
+  /* ---------- routine tabs ---------- */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 1 0 auto;
+    min-width: 42px;
+    padding: 9px 6px 8px;
+    text-align: center;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .tab:hover { border-color: var(--muted); }
+  .tab .tab-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin: 4px auto 0;
+    opacity: 0;
+  }
+  .tab.is-today .tab-dot { opacity: 1; }
+  .tab.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .tab.active .tab-dot { background: var(--accent); }
+  .tab.is-rest { color: var(--muted); }
+
+  .day-subtitle {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 4px 0 14px;
+  }
+  .day-subtitle h2 {
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0;
+  }
+  .day-subtitle .chip { font-size: 11px; }
+  .day-subtitle .chip-edit {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 3px 7px;
+    width: 108px;
+  }
+  .day-subtitle .chip-edit:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .copy-day-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: -6px 0 14px;
+    flex-wrap: wrap;
+  }
+  .copy-day-row select {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-radius: 8px;
+    padding: 6px 8px;
+  }
+  .copy-day-row .copy-day-msg {
+    font-size: 11.5px;
+    color: var(--good);
+    font-weight: 600;
+  }
+
+  .chip-action {
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .chip-action:hover { border-color: var(--accent); color: var(--accent); }
+
+  .rest-card {
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    padding: 28px 18px;
+    text-align: center;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .rest-card .rest-title {
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .rest-card p { font-size: 13px; margin: 0; color: var(--muted); }
+
+  /* ---------- exercise cards ---------- */
+  .exercise {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px 14px 12px;
+    margin-bottom: 12px;
+  }
+  .ex-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ex-name {
+    font-weight: 700;
+    font-size: 15.5px;
+  }
+  .ex-name-input {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    border-radius: 6px;
+    padding: 3px 7px;
+    width: 100%;
+    max-width: 220px;
+  }
+  .ex-name-input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .ex-kcal {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .ex-meta {
+    margin-top: 3px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-weight: 500;
+  }
+  .last-time, .pr-note { font-size: 11.5px; color: var(--muted); }
+  .last-time b { color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+  .pr-note b { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+  .ex-actions { display: flex; align-items: center; gap: 4px; flex: none; }
+  .chart-toggle {
+    border: none;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+  }
+  .chart-toggle:hover, .chart-toggle.active { color: var(--accent); }
+  .chart-toggle svg { width: 16px; height: 16px; }
+  .remove-ex {
+    border: none;
+    background: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 2px;
+    flex: none;
+  }
+
+  .sets {
+    display: grid;
+    grid-template-columns: 22px 1fr 1fr 30px;
+    gap: 8px;
+    align-items: center;
+  }
+  .set-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .sets input {
+    width: 100%;
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 7px 8px;
+    text-align: center;
+  }
+  .sets input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .set-check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    color: transparent;
+    padding: 0;
+  }
+  .set-check svg { width: 14px; height: 14px; }
+  .set-check.done {
+    background: var(--good-bg);
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .set-check:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .col-labels {
+    display: grid;
+    grid-template-columns: 22px 1fr 1fr 30px;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .col-labels span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* ---------- trend chart ---------- */
+  .exercise-chart, .weight-chart-wrap {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .trend-chart { }
+  .trend-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2px;
+  }
+  .trend-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .trend-svg { width: 100%; height: auto; display: block; }
+  .trend-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+    font-size: 10.5px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .chart-empty { font-size: 12px; color: var(--muted); padding: 4px 0; }
+
+  .add-exercise {
+    width: 100%;
+    border: 1.5px dashed var(--line);
+    background: transparent;
+    color: var(--muted);
+    border-radius: var(--radius);
+    padding: 12px;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    margin-bottom: 18px;
+  }
+  .add-exercise:hover { color: var(--ink-soft); border-color: var(--muted); }
+
+  .add-form {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px;
+    margin-bottom: 18px;
+    display: grid;
+    gap: 8px;
+  }
+  .add-form .row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; }
+  .add-form input {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13.5px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 8px 9px;
+  }
+  .add-form input[type="number"] { font-family: 'IBM Plex Mono', monospace; }
+  .add-form .btns { display: flex; gap: 8px; justify-content: flex-end; margin-top: 2px; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 13.5px;
+    border-radius: 9px;
+    padding: 9px 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { filter: brightness(1.06); }
+  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink-soft); }
+  .btn-ghost:hover { border-color: var(--muted); color: var(--ink); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 7px; }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .calorie-row, .note-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    margin-top: 8px;
+  }
+  .calorie-row label, .note-row label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: none;
+  }
+  .calorie-row label svg, .note-row label svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+  .calorie-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .calorie-row input {
+    width: 64px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    text-align: right;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 6px 8px;
+  }
+  .note-row input {
+    flex: 1;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 7px 9px;
+    min-width: 0;
+  }
+  .calorie-row input:focus-visible, .note-row input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .calorie-row .unit { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+  .finish-row {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0 34px;
+  }
+  .finish-row .btn-primary { flex: 1; }
+
+  /* ---------- history / body weight ---------- */
+  .section-block { margin-bottom: 30px; }
+  .section-head-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .label-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .label-dot.accent { background: var(--accent); }
+  .label-dot.vital { background: var(--vital); }
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+  .history-item:last-child { padding-bottom: 0; }
+  .hist-routine { font-weight: 600; }
+  .hist-date { color: var(--muted); font-size: 12px; }
+  .hist-note { color: var(--ink-soft); font-size: 12px; margin-top: 2px; font-style: italic; }
+  .hist-volume {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    text-align: right;
+    line-height: 1.5;
+    flex: none;
+  }
+  .empty-hist { color: var(--muted); font-size: 13px; padding: 4px 0 0; }
+
+  .weight-latest { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+  .weight-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .weight-delta { font-size: 12.5px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+  .weight-delta.up { color: var(--danger); }
+  .weight-delta.down { color: var(--good); }
+  .weight-delta.flat { color: var(--muted); }
+  .bmi-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 3px 9px;
+    margin-left: auto;
+  }
+  .bmi-badge.under { color: var(--muted); background: var(--surface-2); }
+  .bmi-badge.normal { color: var(--good); background: var(--good-bg); }
+  .bmi-badge.over { color: var(--accent); background: var(--surface-2); }
+  .bmi-badge.obese { color: var(--accent-ink); background: var(--danger); }
+
+  .profile-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 8px;
+  }
+  .profile-field label {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .profile-field input {
+    width: 100%;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13.5px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 8px 9px;
+  }
+  .profile-field input[type="number"] { font-family: 'IBM Plex Mono', monospace; }
+  .profile-field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .weight-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .weight-item:first-child { border-top: none; }
+  .weight-item .w-date { color: var(--muted); }
+  .weight-item .w-val { font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+  /* ---------- toasts ---------- */
+  .toast-stack {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: min(92vw, 420px);
+    pointer-events: none;
+  }
+  .toast {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    animation: toast-in 0.25s ease-out;
+  }
+  .toast b { color: var(--accent); }
+  @keyframes toast-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- rest timer ---------- */
+  .rest-timer-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%) translateY(140%);
+    width: min(92vw, 524px);
+    background: var(--surface-2);
+    color: var(--ink);
+    border: 1.5px solid var(--accent);
+    border-radius: 18px;
+    box-shadow: var(--shadow), 0 0 0 4px var(--accent-glow), 0 14px 32px var(--accent-glow);
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 30;
+    transition: transform 0.25s ease-out;
+  }
+  .rest-timer-bar.visible { transform: translateX(-50%) translateY(0); }
+  .rest-timer-bar.done { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .timer-btn {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: inherit;
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: none;
+  }
+  .timer-display-wrap { flex: 1; text-align: center; min-width: 0; }
+  .timer-display {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    line-height: 1.1;
+  }
+  .timer-caption {
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+  .timer-icon-btn {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: inherit;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex: none;
+  }
+  .timer-icon-btn svg { width: 14px; height: 14px; }
+  .timer-play-btn {
+    width: 42px;
+    height: 42px;
+    margin-left: 6px;
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+    flex: none;
+  }
+  .timer-play-btn svg { width: 19px; height: 19px; }
+  .timer-skip-btn { width: 42px; height: 42px; margin-left: 4px; flex: none; }
+  .timer-skip-btn svg { width: 19px; height: 19px; }
+  .rest-timer-bar.done .timer-play-btn { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--accent); }
+
+  /* ---------- modal ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-panel {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 480px;
+    width: 100%;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 18px;
+  }
+  .modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .modal-head h3 { font-family: 'Archivo', sans-serif; font-size: 16px; margin: 0; }
+  .modal-hint { font-size: 12.5px; color: var(--muted); margin: 0 0 16px; }
+  .modal-section { margin-bottom: 16px; }
+  .modal-section:last-child { margin-bottom: 0; }
+  .modal-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .modal-section-head span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; color: var(--muted); }
+  .modal-panel textarea {
+    width: 100%;
+    height: 110px;
+    resize: vertical;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 8px;
+  }
+  .modal-msg { font-size: 12px; margin: 6px 0 0; min-height: 15px; }
+  .modal-msg.err { color: var(--danger); }
+  .modal-msg.ok { color: var(--good); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header id="header">
+    <div class="titlebar">
+      <div>
+        <h1>Iron <span>Log</span></h1>
+        <div class="today" id="todayLabel"></div>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="dataToggle" aria-label="Backup and restore data">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button class="unit-toggle" id="unitToggle" aria-label="Toggle weight unit">KG</button>
+        <button class="icon-btn" id="editToggle" aria-label="Edit exercises" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </button>
+        <button class="icon-btn timer-open-btn" id="timerToggle" aria-label="Start rest timer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num" id="statStreak">0</div>
+        <div class="stat-label">Day streak</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statWeek">0</div>
+        <div class="stat-label">This week</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statVolume">0</div>
+        <div class="stat-label" id="statVolumeLabel">Kg lifted total</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statCalories">0</div>
+        <div class="stat-label">Kcal burned total</div>
+      </div>
+    </div>
+
+    <div class="program-row" id="programRow"></div>
+    <div class="program-edit-row" id="programEditRow"></div>
+    <div id="programForm" style="display:none;"></div>
+
+    <div class="tabs" id="tabs" role="tablist"></div>
+  </header>
+
+  <div class="day-subtitle" id="daySubtitle"></div>
+  <div class="copy-day-row" id="copyDayRow" style="display:none;"></div>
+  <div class="col-labels" id="colLabels">
+    <span>#</span><span id="colLabelWeight">Kg</span><span>Reps</span><span></span>
+  </div>
+  <div id="exerciseList"></div>
+  <div id="restCard"></div>
+  <button class="add-exercise" id="addExerciseBtn">+ Add exercise</button>
+  <div id="addForm" style="display:none;"></div>
+
+  <div class="calorie-row" id="calorieRow">
+    <label for="calorieInput">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      Calories
+    </label>
+    <div class="calorie-input-wrap">
+      <input type="number" id="calorieInput" inputMode="numeric" placeholder="0" min="0">
+      <span class="unit">kcal</span>
+    </div>
+  </div>
+
+  <div class="note-row" id="noteRow">
+    <label for="noteInput">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+      Notes
+    </label>
+    <input type="text" id="noteInput" placeholder="How did it feel? (optional)" maxlength="140">
+  </div>
+
+  <div class="finish-row" id="finishRow">
+    <button class="btn btn-ghost" id="resetBtn">Clear</button>
+    <button class="btn btn-primary" id="finishBtn">Finish workout</button>
+  </div>
+
+  <div class="section-block">
+    <p class="section-label"><span class="label-dot accent"></span>History</p>
+    <div id="historyList"></div>
+  </div>
+
+  <div class="section-block">
+    <p class="section-label">Profile</p>
+    <div class="profile-row">
+      <div class="profile-field">
+        <label for="profileName">Name</label>
+        <input type="text" id="profileName" placeholder="Your name">
+      </div>
+      <div class="profile-field">
+        <label for="profileHeight">Height (cm)</label>
+        <input type="number" id="profileHeight" placeholder="cm" step="0.1" min="0">
+      </div>
+      <div class="profile-field">
+        <label for="profileAge">Age</label>
+        <input type="number" id="profileAge" placeholder="yrs" min="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-head-row">
+      <p class="section-label"><span class="label-dot vital"></span>Body weight</p>
+      <button class="btn btn-ghost btn-sm" id="addWeightBtn">+ Log weight</button>
+    </div>
+    <div id="weightForm" style="display:none;"></div>
+    <div id="weightSummary"></div>
+    <div id="weightChart"></div>
+    <div id="weightList"></div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-head-row">
+      <p class="section-label"><span class="label-dot vital"></span>Body measurements</p>
+      <button class="btn btn-ghost btn-sm" id="addMeasureBtn">+ Log</button>
+    </div>
+    <div class="program-row" id="measureTypeRow"></div>
+    <div class="program-edit-row" id="measureTypeEditRow"></div>
+    <div id="measureTypeForm" style="display:none;"></div>
+    <div id="measureForm" style="display:none;"></div>
+    <div id="measureSummary"></div>
+    <div id="measureChart"></div>
+    <div id="measureList"></div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<div class="rest-timer-bar" id="restTimerBar">
+  <button class="timer-btn" id="timerMinus" aria-label="Subtract 15 seconds">&minus;15</button>
+  <div class="timer-display-wrap">
+    <span class="timer-display" id="timerDisplay">1:00</span>
+    <span class="timer-caption">Rest</span>
+  </div>
+  <button class="timer-btn" id="timerPlus" aria-label="Add 15 seconds">+15</button>
+  <button class="timer-icon-btn timer-play-btn" id="timerPauseBtn" aria-label="Pause timer"></button>
+  <button class="timer-icon-btn timer-skip-btn" id="timerSkipBtn" aria-label="Dismiss timer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
+<div class="modal-overlay" id="dataModal">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3>Backup &amp; restore</h3>
+      <button class="icon-btn" id="modalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="modal-hint">Your data lives only in this browser. Copy it somewhere safe, or paste a backup to restore it.</p>
+    <div class="modal-section">
+      <div class="modal-section-head"><span>Export</span><button class="btn btn-ghost btn-sm" id="copyDataBtn">Copy</button></div>
+      <textarea id="exportArea" readonly aria-label="Exported data"></textarea>
+      <p class="modal-msg" id="exportMsg"></p>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-head"><span>Import</span><button class="btn btn-primary btn-sm" id="restoreDataBtn">Restore</button></div>
+      <textarea id="importArea" placeholder="Paste exported data here" aria-label="Data to import"></textarea>
+      <p class="modal-msg" id="importMsg"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "iron-log-v1";
+  var LB_PER_KG = 2.2046226218;
+
+  var TYPE_LABEL = { push: "Push", pull: "Pull", legs: "Legs", rest: "Rest" };
+
+  var PUSH_EX = [
+    { id: "bench", name: "Bench Press", sets: 4, reps: 8 },
+    { id: "ohp", name: "Overhead Press", sets: 3, reps: 10 },
+    { id: "incline", name: "Incline DB Press", sets: 3, reps: 10 },
+    { id: "tripd", name: "Triceps Pushdown", sets: 3, reps: 12 }
+  ];
+  var PULL_EX = [
+    { id: "deadlift", name: "Deadlift", sets: 4, reps: 6 },
+    { id: "row", name: "Barbell Row", sets: 4, reps: 8 },
+    { id: "latpd", name: "Lat Pulldown", sets: 3, reps: 10 },
+    { id: "curl", name: "Bicep Curl", sets: 3, reps: 12 }
+  ];
+  var LEGS_EX = [
+    { id: "squat", name: "Back Squat", sets: 4, reps: 8 },
+    { id: "rdl", name: "Romanian Deadlift", sets: 3, reps: 10 },
+    { id: "legpress", name: "Leg Press", sets: 3, reps: 12 },
+    { id: "calf", name: "Calf Raise", sets: 4, reps: 15 }
+  ];
+
+  var HYPER_SUN = [
+    { id: "h_bench", name: "Flat DB Bench Press (10kg ea) — Chest", sets: 4, reps: 12, kcal: 35 },
+    { id: "h_incline", name: "Incline DB Press (7.5kg ea) — Chest", sets: 3, reps: 12, kcal: 30 },
+    { id: "h_shoulderpress", name: "DB Shoulder Press (7.5kg ea) — Shoulder", sets: 3, reps: 12, kcal: 30 },
+    { id: "h_lateral1", name: "DB Lateral Raise (5kg ea) — Shoulder", sets: 3, reps: 15, kcal: 18 },
+    { id: "h_skull", name: "DB Skull Crusher (5kg ea) — Tricep", sets: 3, reps: 12, kcal: 16 },
+    { id: "h_tridrop", name: "Overhead Ext Drop-Set (12.5→2.5kg ea) — Tricep", sets: 1, reps: 10, kcal: 25 },
+    { id: "h_hangknee", name: "Hanging Knee Raise — Abs", sets: 3, reps: 15, kcal: 14 },
+    { id: "h_plank1", name: "Plank (sec) — Abs", sets: 3, reps: 45, kcal: 15 }
+  ];
+  var HYPER_MON = [
+    { id: "h_pullup", name: "Pull-Up — Back", sets: 4, reps: 6, kcal: 25 },
+    { id: "h_chinup", name: "Chin-Up — Back", sets: 3, reps: 6, kcal: 22 },
+    { id: "h_row1arm", name: "Single-Arm DB Row (12.5kg) — Back", sets: 4, reps: 12, kcal: 32 },
+    { id: "h_revfly", name: "DB Reverse Fly (2.5kg ea) — Back", sets: 3, reps: 15, kcal: 16 },
+    { id: "h_curl", name: "DB Bicep Curl (7.5kg ea) — Bicep", sets: 3, reps: 12, kcal: 16 },
+    { id: "h_hammer1", name: "Hammer Curl (7.5kg ea) — Bicep", sets: 3, reps: 12, kcal: 16 },
+    { id: "h_curldrop", name: "Curl Drop-Set (12.5→2.5kg ea) — Bicep", sets: 1, reps: 10, kcal: 24 },
+    { id: "h_deadhang", name: "Dead Hang (sec) — Forearm", sets: 3, reps: 20, kcal: 10 },
+    { id: "h_wristcurl1", name: "DB Wrist Curl (2.5kg ea) — Forearm", sets: 3, reps: 15, kcal: 8 }
+  ];
+  var HYPER_TUE = [
+    { id: "h_goblet", name: "DB Goblet Squat (12.5kg) — Legs", sets: 4, reps: 15, kcal: 40 },
+    { id: "h_bulgarian", name: "Bulgarian Split Squat (7.5kg ea) — Legs", sets: 3, reps: 12, kcal: 32 },
+    { id: "h_lunge", name: "Walking Lunge (7.5kg ea) — Legs", sets: 3, reps: 12, kcal: 30 },
+    { id: "h_stepup", name: "DB Step-Up (7.5kg ea) — Legs", sets: 3, reps: 12, kcal: 28 },
+    { id: "h_calf1", name: "Standing Calf Raise (12.5kg ea) — Legs", sets: 4, reps: 20, kcal: 18 },
+    { id: "h_hanglegraise", name: "Hanging Leg Raise — Abs", sets: 3, reps: 12, kcal: 14 },
+    { id: "h_rtwist", name: "Russian Twist (5kg) — Abs", sets: 3, reps: 20, kcal: 15 }
+  ];
+  var HYPER_WED = [
+    { id: "h_arnold", name: "DB Arnold Press (7.5kg ea) — Shoulder", sets: 4, reps: 12, kcal: 32 },
+    { id: "h_lateral2", name: "Standing DB Lateral Raise (5kg ea) — Shoulder", sets: 4, reps: 15, kcal: 20 },
+    { id: "h_frontraise", name: "DB Front Raise (5kg ea) — Shoulder", sets: 3, reps: 15, kcal: 18 },
+    { id: "h_fly", name: "Flat/Decline DB Fly (7.5kg ea) — Chest", sets: 3, reps: 15, kcal: 24 },
+    { id: "h_cgpress", name: "Close-Grip DB Floor Press (7.5kg ea) — Tricep", sets: 3, reps: 12, kcal: 26 },
+    { id: "h_diamond", name: "Diamond Push-Up — Tricep", sets: 3, reps: 10, kcal: 18 },
+    { id: "h_latdrop", name: "Lateral Raise Drop-Set (10→2.5kg ea) — Shoulder", sets: 1, reps: 10, kcal: 22 },
+    { id: "h_shouldertap", name: "Plank Shoulder Tap — Abs", sets: 3, reps: 20, kcal: 15 }
+  ];
+  var HYPER_THU = [
+    { id: "h_widepullup", name: "Wide-Grip Pull-Up — Back", sets: 4, reps: 6, kcal: 25 },
+    { id: "h_bentrow", name: "Bent-Over DB Row (10kg ea) — Back", sets: 4, reps: 12, kcal: 34 },
+    { id: "h_renegade", name: "Renegade Row (7.5kg ea) — Back", sets: 3, reps: 10, kcal: 26 },
+    { id: "h_shrug", name: "DB Shrug (12.5kg ea) — Back", sets: 3, reps: 15, kcal: 14 },
+    { id: "h_concentration", name: "Concentration Curl (7.5kg) — Bicep", sets: 3, reps: 12, kcal: 15 },
+    { id: "h_hammer2", name: "Cross-Body Hammer Curl (7.5kg ea) — Bicep", sets: 3, reps: 12, kcal: 16 },
+    { id: "h_farmers", name: "Farmer's Carry (12.5kg ea, sec) — Forearm", sets: 3, reps: 30, kcal: 30 },
+    { id: "h_wristcurl2", name: "Wrist Curl + Reverse (2.5kg ea) — Forearm", sets: 2, reps: 15, kcal: 10 }
+  ];
+  var HYPER_FRI = [
+    { id: "h_rdl", name: "DB Romanian Deadlift (10kg ea) — Legs", sets: 4, reps: 12, kcal: 38 },
+    { id: "h_singlerdl", name: "Single-Leg RDL (7.5kg ea) — Legs", sets: 3, reps: 10, kcal: 28 },
+    { id: "h_glutebridge", name: "DB Glute Bridge (10kg) — Legs", sets: 3, reps: 15, kcal: 22 },
+    { id: "h_sumosquat", name: "Sumo Squat (10kg) — Legs", sets: 3, reps: 15, kcal: 26 },
+    { id: "h_curtsy", name: "Curtsy Lunge (5kg ea) — Legs", sets: 3, reps: 12, kcal: 24 },
+    { id: "h_calf2", name: "Seated Calf Raise (12.5kg) — Legs", sets: 4, reps: 20, kcal: 16 },
+    { id: "h_flutter", name: "Leg Raise + Flutter Kicks (sec) — Abs", sets: 3, reps: 20, kcal: 15 }
+  ];
+  var HYPER_SAT = [
+    { id: "h_cgchinup", name: "Close-Grip Chin-Up — Back", sets: 4, reps: 6, kcal: 22 },
+    { id: "h_ohtriext", name: "Overhead DB Triceps Extension (7.5kg) — Tricep", sets: 3, reps: 12, kcal: 18 },
+    { id: "h_preacher", name: "DB Preacher-Style Curl (7.5kg ea) — Bicep", sets: 3, reps: 12, kcal: 16 },
+    { id: "h_kickback", name: "DB Triceps Kickback (5kg ea) — Tricep", sets: 3, reps: 15, kcal: 15 },
+    { id: "h_21s", name: "21s Bicep Curl (5kg ea) — Bicep", sets: 2, reps: 21, kcal: 20 },
+    { id: "h_fulldrop", name: "Full-Ladder Finisher (12.5→2.5kg ea) — Arms", sets: 1, reps: 10, kcal: 28 },
+    { id: "h_abcircuit", name: "Ab Circuit — Abs", sets: 3, reps: 20, kcal: 20 }
+  ];
+
+  function hypertrophyWeek() {
+    return [
+      { id: "sun", name: "Sunday", short: "Sun", type: "push", typeLabel: "Push I", exercises: cloneEx(HYPER_SUN) },
+      { id: "mon", name: "Monday", short: "Mon", type: "pull", typeLabel: "Pull I", exercises: cloneEx(HYPER_MON) },
+      { id: "tue", name: "Tuesday", short: "Tue", type: "legs", typeLabel: "Legs I", exercises: cloneEx(HYPER_TUE) },
+      { id: "wed", name: "Wednesday", short: "Wed", type: "push", typeLabel: "Push II", exercises: cloneEx(HYPER_WED) },
+      { id: "thu", name: "Thursday", short: "Thu", type: "pull", typeLabel: "Pull II", exercises: cloneEx(HYPER_THU) },
+      { id: "fri", name: "Friday", short: "Fri", type: "legs", typeLabel: "Legs II", exercises: cloneEx(HYPER_FRI) },
+      { id: "sat", name: "Saturday", short: "Sat", type: "arms", typeLabel: "Arms", exercises: cloneEx(HYPER_SAT) }
+    ];
+  }
+
+  function cloneEx(list) { return JSON.parse(JSON.stringify(list)); }
+
+  function freshWeek(pushEx, pullEx, legsEx) {
+    return [
+      { id: "sun", name: "Sunday", short: "Sun", type: "rest", typeLabel: "Rest", exercises: [] },
+      { id: "mon", name: "Monday", short: "Mon", type: "push", typeLabel: "Push", exercises: cloneEx(pushEx) },
+      { id: "tue", name: "Tuesday", short: "Tue", type: "pull", typeLabel: "Pull", exercises: cloneEx(pullEx) },
+      { id: "wed", name: "Wednesday", short: "Wed", type: "legs", typeLabel: "Legs", exercises: cloneEx(legsEx) },
+      { id: "thu", name: "Thursday", short: "Thu", type: "push", typeLabel: "Push", exercises: cloneEx(pushEx) },
+      { id: "fri", name: "Friday", short: "Fri", type: "pull", typeLabel: "Pull", exercises: cloneEx(pullEx) },
+      { id: "sat", name: "Saturday", short: "Sat", type: "legs", typeLabel: "Legs", exercises: cloneEx(legsEx) }
+    ];
+  }
+
+  function freshPrograms() {
+    return [{ id: "default", name: "My Program", routines: hypertrophyWeek() }];
+  }
+
+  function weekdayId() {
+    var ids = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    return ids[new Date().getDay()];
+  }
+
+  var WEEK_ORDER = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+  function normalizeState(parsed) {
+    parsed = (parsed && typeof parsed === "object") ? parsed : {};
+    var programs;
+
+    if (Array.isArray(parsed.programs) && parsed.programs.length) {
+      programs = parsed.programs;
+    } else if (Array.isArray(parsed.routines) && parsed.routines.length) {
+      var routines = parsed.routines;
+      var hasWeek = routines.some(function (r) { return r.id === "mon"; });
+      if (!hasWeek) {
+        var byId = {};
+        routines.forEach(function (r) { byId[r.id] = r; });
+        routines = freshWeek(
+          byId.push ? byId.push.exercises : PUSH_EX,
+          byId.pull ? byId.pull.exercises : PULL_EX,
+          byId.legs ? byId.legs.exercises : LEGS_EX
+        );
+      }
+      programs = [{ id: "default", name: "My Program", routines: routines }];
+
+      var oldDraft = parsed.draft || {};
+      var newDraft = {};
+      Object.keys(oldDraft).forEach(function (rid) { newDraft["default|" + rid] = oldDraft[rid]; });
+      parsed.draft = newDraft;
+
+      var oldCal = parsed.draftCalories || {};
+      var newCal = {};
+      Object.keys(oldCal).forEach(function (rid) { newCal["default|" + rid] = oldCal[rid]; });
+      parsed.draftCalories = newCal;
+
+      parsed.activeProgram = "default";
+    } else {
+      programs = freshPrograms();
+    }
+
+    programs.forEach(function (p) {
+      if (!p.id) p.id = "prog_" + Math.random().toString(36).slice(2, 9);
+      if (!Array.isArray(p.routines) || !p.routines.length) p.routines = hypertrophyWeek();
+      p.routines.sort(function (a, b) { return WEEK_ORDER.indexOf(a.id) - WEEK_ORDER.indexOf(b.id); });
+      p.routines.forEach(function (r) {
+        if (typeof r.typeLabel !== "string") r.typeLabel = TYPE_LABEL[r.type] || "";
+        if (!Array.isArray(r.exercises)) r.exercises = [];
+      });
+    });
+
+    var activeProgram = parsed.activeProgram;
+    if (!activeProgram || !programs.some(function (p) { return p.id === activeProgram; })) {
+      activeProgram = programs[0].id;
+    }
+
+    var measurementTypes = Array.isArray(parsed.measurementTypes) && parsed.measurementTypes.length
+      ? parsed.measurementTypes
+      : ["Waist", "Chest", "Arms"];
+    var measurements = (parsed.measurements && typeof parsed.measurements === "object") ? parsed.measurements : {};
+    measurementTypes.forEach(function (t) {
+      if (!Array.isArray(measurements[t])) measurements[t] = [];
+    });
+    var activeMeasurementType = measurementTypes.indexOf(parsed.activeMeasurementType) >= 0
+      ? parsed.activeMeasurementType
+      : measurementTypes[0];
+
+    return {
+      programs: programs,
+      activeProgram: activeProgram,
+      activeRoutine: weekdayId(),
+      history: Array.isArray(parsed.history) ? parsed.history : [],
+      draft: parsed.draft || {},
+      draftCalories: parsed.draftCalories || {},
+      draftNotes: parsed.draftNotes || {},
+      bodyWeight: Array.isArray(parsed.bodyWeight) ? parsed.bodyWeight : [],
+      measurementTypes: measurementTypes,
+      measurements: measurements,
+      activeMeasurementType: activeMeasurementType,
+      unit: parsed.unit === "lb" ? "lb" : "kg",
+      restDurationSec: (parsed.restDurationSec && parsed.restDurationSec !== 90) ? parsed.restDurationSec : 60,
+      profile: (parsed.profile && typeof parsed.profile === "object") ? {
+        name: typeof parsed.profile.name === "string" ? parsed.profile.name : "",
+        heightCm: parsed.profile.heightCm || "",
+        age: parsed.profile.age || ""
+      } : { name: "", heightCm: "", age: "" }
+    };
+  }
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      var parsed = raw ? JSON.parse(raw) : {};
+      return normalizeState(parsed);
+    } catch (e) {
+      return normalizeState({});
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) { /* best effort */ }
+  }
+
+  var state = loadState();
+  var editing = false;
+  var addFormOpen = false;
+  var programFormOpen = false;
+  var weightFormOpen = false;
+  var expandedCharts = {};
+
+  var restTimer = { remaining: 0, running: false, intervalId: null };
+
+  function uid(prefix) {
+    return prefix + "_" + Math.random().toString(36).slice(2, 9);
+  }
+
+  function round1(n) { return Math.round(n * 10) / 10; }
+
+  function kgToUnit(kg) { return state.unit === "lb" ? kg * LB_PER_KG : kg; }
+  function unitToKg(v) { return state.unit === "lb" ? v / LB_PER_KG : v; }
+  function unitLabel() { return state.unit === "lb" ? "lb" : "kg"; }
+  function fmtWeight(kg) {
+    var v = round1(kgToUnit(kg));
+    return (v % 1 === 0) ? String(v) : v.toFixed(1);
+  }
+  function weightOf(setEntryOrNum) {
+    if (typeof setEntryOrNum === "number") return setEntryOrNum;
+    var n = parseFloat(setEntryOrNum);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function todayISO() {
+    var d = new Date();
+    var tz = d.getTimezoneOffset() * 60000;
+    return new Date(d - tz).toISOString().slice(0, 10);
+  }
+
+  function fmtDate(iso) {
+    var d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+  }
+  function fmtDateShort(iso) {
+    var d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  }
+
+  function getProgram(id) {
+    for (var i = 0; i < state.programs.length; i++) {
+      if (state.programs[i].id === id) return state.programs[i];
+    }
+    return state.programs[0];
+  }
+  function activeProgram() { return getProgram(state.activeProgram); }
+
+  function getRoutine(id) {
+    var p = activeProgram();
+    for (var i = 0; i < p.routines.length; i++) {
+      if (p.routines[i].id === id) return p.routines[i];
+    }
+    return p.routines[0];
+  }
+
+  function draftKey(routineId) { return state.activeProgram + "|" + routineId; }
+
+  function getDraft(routineId, exerciseId, setsCount) {
+    var key = draftKey(routineId);
+    if (!state.draft[key]) state.draft[key] = {};
+    if (!state.draft[key][exerciseId]) {
+      var arr = [];
+      for (var i = 0; i < setsCount; i++) arr.push({ weight: "", reps: "", done: false });
+      state.draft[key][exerciseId] = arr;
+    }
+    var d = state.draft[key][exerciseId];
+    while (d.length < setsCount) d.push({ weight: "", reps: "", done: false });
+    return d;
+  }
+
+  function getDraftCalories(routineId) { return state.draftCalories[draftKey(routineId)] || ""; }
+  function setDraftCalories(routineId, value) { state.draftCalories[draftKey(routineId)] = value; }
+  function getDraftNote(routineId) { return state.draftNotes[draftKey(routineId)] || ""; }
+  function setDraftNote(routineId, value) { state.draftNotes[draftKey(routineId)] = value; }
+
+  function normalizedSetWeight(s) {
+    return typeof s.weight === "number" ? s.weight : (parseFloat(s.weight) || 0);
+  }
+
+  function lastTimeFor(exerciseName) {
+    for (var i = state.history.length - 1; i >= 0; i--) {
+      var session = state.history[i];
+      for (var j = 0; j < session.entries.length; j++) {
+        if (session.entries[j].name === exerciseName) {
+          var best = 0;
+          session.entries[j].sets.forEach(function (s) {
+            var w = normalizedSetWeight(s);
+            if (s.done && w > best) best = w;
+          });
+          if (best > 0) return { weight: best, date: session.date };
+        }
+      }
+    }
+    return null;
+  }
+
+  function bestEverFor(exerciseName) {
+    var best = null;
+    state.history.forEach(function (session) {
+      session.entries.forEach(function (entry) {
+        if (entry.name !== exerciseName) return;
+        entry.sets.forEach(function (s) {
+          if (!s.done) return;
+          var w = normalizedSetWeight(s);
+          if (w <= 0) return;
+          if (!best || w > best.weight) best = { weight: w, date: session.date };
+        });
+      });
+    });
+    return best;
+  }
+
+  function lastSessionEntryFor(exerciseName) {
+    for (var i = state.history.length - 1; i >= 0; i--) {
+      var session = state.history[i];
+      for (var j = 0; j < session.entries.length; j++) {
+        if (session.entries[j].name === exerciseName) return session.entries[j];
+      }
+    }
+    return null;
+  }
+
+  function computeStreak() {
+    var days = {};
+    state.history.forEach(function (s) { days[s.date] = true; });
+    var streak = 0;
+    var cursor = new Date(todayISO() + "T00:00:00");
+    if (!days[todayISO()]) cursor.setDate(cursor.getDate() - 1);
+    while (true) {
+      var iso = new Date(cursor.getTime() - cursor.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+      if (days[iso]) { streak++; cursor.setDate(cursor.getDate() - 1); }
+      else break;
+    }
+    return streak;
+  }
+
+  function computeWeekCount() {
+    var now = new Date();
+    var start = new Date(now);
+    start.setDate(start.getDate() - start.getDay());
+    start.setHours(0, 0, 0, 0);
+    var count = 0;
+    state.history.forEach(function (s) {
+      var d = new Date(s.date + "T00:00:00");
+      if (d >= start) count++;
+    });
+    return count;
+  }
+
+  function computeTotalVolume() {
+    var total = 0;
+    state.history.forEach(function (s) { total += s.volume || 0; });
+    return total;
+  }
+
+  function computeTotalCalories() {
+    var total = 0;
+    state.history.forEach(function (s) { total += s.calories || 0; });
+    return Math.round(total);
+  }
+
+  function renderStats() {
+    document.getElementById("statStreak").textContent = computeStreak();
+    document.getElementById("statWeek").textContent = computeWeekCount();
+    var vol = Math.round(kgToUnit(computeTotalVolume()));
+    document.getElementById("statVolume").textContent = vol >= 1000 ? (vol / 1000).toFixed(1) + "k" : vol;
+    document.getElementById("statVolumeLabel").textContent = unitLabel().toUpperCase() + " lifted total";
+    var cals = computeTotalCalories();
+    document.getElementById("statCalories").textContent = cals >= 1000 ? (cals / 1000).toFixed(1) + "k" : cals;
+    document.getElementById("colLabelWeight").textContent = unitLabel().toUpperCase();
+    document.getElementById("unitToggle").textContent = unitLabel().toUpperCase();
+  }
+
+  /* ---------- program row ---------- */
+
+  function renderProgramRow() {
+    var wrap = document.getElementById("programRow");
+    wrap.innerHTML = "";
+    state.programs.forEach(function (p) {
+      var pill = document.createElement("button");
+      pill.className = "program-pill" + (p.id === state.activeProgram ? " active" : "");
+      pill.textContent = p.name;
+      pill.setAttribute("role", "tab");
+      pill.setAttribute("aria-selected", p.id === state.activeProgram ? "true" : "false");
+      pill.addEventListener("click", function () {
+        state.activeProgram = p.id;
+        addFormOpen = false;
+        saveState();
+        renderAll();
+      });
+      wrap.appendChild(pill);
+    });
+    var addPill = document.createElement("button");
+    addPill.className = "program-pill program-pill-add";
+    addPill.textContent = "+ Program";
+    addPill.addEventListener("click", function () {
+      programFormOpen = true;
+      renderProgramForm();
+    });
+    wrap.appendChild(addPill);
+
+    var editRow = document.getElementById("programEditRow");
+    editRow.innerHTML = "";
+    if (editing) {
+      editRow.style.display = "flex";
+      var input = document.createElement("input");
+      input.type = "text";
+      input.className = "program-rename";
+      input.maxLength = 24;
+      input.value = activeProgram().name;
+      input.setAttribute("aria-label", "Rename program");
+      input.addEventListener("input", function () {
+        activeProgram().name = input.value;
+        saveState();
+      });
+      editRow.appendChild(input);
+      if (state.programs.length > 1) {
+        var del = document.createElement("button");
+        del.className = "remove-ex";
+        del.textContent = "Delete program";
+        del.addEventListener("click", function () {
+          var idx = state.programs.findIndex(function (p) { return p.id === state.activeProgram; });
+          if (idx >= 0) state.programs.splice(idx, 1);
+          state.activeProgram = state.programs[0].id;
+          saveState();
+          renderAll();
+        });
+        editRow.appendChild(del);
+      }
+    } else {
+      editRow.style.display = "none";
+    }
+  }
+
+  function renderProgramForm() {
+    var wrap = document.getElementById("programForm");
+    if (!programFormOpen) { wrap.style.display = "none"; wrap.innerHTML = ""; return; }
+    wrap.style.display = "block";
+    wrap.innerHTML = "";
+    var form = document.createElement("div");
+    form.className = "add-form";
+    var input = document.createElement("input");
+    input.type = "text";
+    input.id = "newProgName";
+    input.placeholder = "Program name (e.g. Strength)";
+    form.appendChild(input);
+    var btns = document.createElement("div");
+    btns.className = "btns";
+    var cancel = document.createElement("button");
+    cancel.className = "btn btn-ghost";
+    cancel.textContent = "Cancel";
+    cancel.addEventListener("click", function () { programFormOpen = false; renderProgramForm(); });
+    var confirm = document.createElement("button");
+    confirm.className = "btn btn-primary";
+    confirm.textContent = "Create";
+    confirm.addEventListener("click", function () {
+      var name = input.value.trim();
+      if (!name) { input.focus(); return; }
+      var newProg = { id: uid("prog"), name: name, routines: hypertrophyWeek() };
+      state.programs.push(newProg);
+      state.activeProgram = newProg.id;
+      programFormOpen = false;
+      saveState();
+      renderAll();
+    });
+    btns.appendChild(cancel);
+    btns.appendChild(confirm);
+    form.appendChild(btns);
+    wrap.appendChild(form);
+    input.focus();
+  }
+
+  /* ---------- tabs / day subtitle ---------- */
+
+  function renderTabs() {
+    var tabs = document.getElementById("tabs");
+    tabs.innerHTML = "";
+    var today = weekdayId();
+    activeProgram().routines.forEach(function (r) {
+      var btn = document.createElement("button");
+      var classes = ["tab"];
+      if (r.id === state.activeRoutine) classes.push("active");
+      if (r.id === today) classes.push("is-today");
+      if (r.type === "rest") classes.push("is-rest");
+      btn.className = classes.join(" ");
+      btn.innerHTML = r.short + '<span class="tab-dot"></span>';
+      btn.setAttribute("role", "tab");
+      btn.setAttribute("aria-selected", r.id === state.activeRoutine ? "true" : "false");
+      btn.addEventListener("click", function () {
+        state.activeRoutine = r.id;
+        addFormOpen = false;
+        saveState();
+        renderAll();
+      });
+      tabs.appendChild(btn);
+    });
+  }
+
+  function checkIcon() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  }
+  function chartIcon() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>';
+  }
+
+  function renderDaySubtitle() {
+    var routine = getRoutine(state.activeRoutine);
+    var wrap = document.getElementById("daySubtitle");
+    wrap.innerHTML = "";
+
+    var h2 = document.createElement("h2");
+    h2.textContent = routine.name;
+    wrap.appendChild(h2);
+
+    if (editing) {
+      var input = document.createElement("input");
+      input.type = "text";
+      input.className = "chip-edit";
+      input.maxLength = 16;
+      input.placeholder = "Label (e.g. Push)";
+      input.value = routine.typeLabel || "";
+      input.setAttribute("aria-label", "Label for " + routine.name);
+      input.addEventListener("input", function () {
+        routine.typeLabel = input.value;
+        saveState();
+      });
+      wrap.appendChild(input);
+    } else if (routine.typeLabel) {
+      var chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = routine.typeLabel;
+      wrap.appendChild(chip);
+    }
+
+    renderCopyDayRow(routine);
+  }
+
+  function renderCopyDayRow(routine) {
+    var row = document.getElementById("copyDayRow");
+    row.innerHTML = "";
+    if (!editing) { row.style.display = "none"; return; }
+
+    var others = activeProgram().routines.filter(function (r) { return r.id !== routine.id; });
+    if (!others.length) { row.style.display = "none"; return; }
+    row.style.display = "flex";
+
+    var label = document.createElement("span");
+    label.className = "chip";
+    label.textContent = "Copy to:";
+    row.appendChild(label);
+
+    var select = document.createElement("select");
+    select.setAttribute("aria-label", "Copy " + routine.name + "'s exercises to");
+    others.forEach(function (r) {
+      var opt = document.createElement("option");
+      opt.value = r.id;
+      opt.textContent = r.name + (r.exercises.length ? "" : " (rest)");
+      select.appendChild(opt);
+    });
+    row.appendChild(select);
+
+    var btn = document.createElement("button");
+    btn.className = "btn btn-ghost btn-sm";
+    btn.textContent = "Copy";
+    row.appendChild(btn);
+
+    var msg = document.createElement("span");
+    msg.className = "copy-day-msg";
+    row.appendChild(msg);
+
+    btn.addEventListener("click", function () {
+      var target = getRoutine(select.value);
+      target.exercises = cloneEx(routine.exercises);
+      target.type = routine.type;
+      target.typeLabel = routine.typeLabel;
+      delete state.draft[draftKey(target.id)];
+      saveState();
+      msg.textContent = "Copied to " + target.name + ".";
+      setTimeout(function () { msg.textContent = ""; }, 2600);
+      if (target.id === state.activeRoutine) renderExercises();
+    });
+  }
+
+  /* ---------- trend chart builder ---------- */
+
+  function buildTrendSVG(points, colorVar) {
+    if (points.length < 2) return null;
+    colorVar = colorVar || "--accent";
+    var stroke = "var(" + colorVar + ")";
+    var W = 480, H = 120, padL = 6, padR = 6, padT = 12, padB = 10;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var values = points.map(function (p) { return p.value; });
+    var min = Math.min.apply(null, values);
+    var max = Math.max.apply(null, values);
+    if (min === max) { min -= 1; max += 1; }
+    var range = max - min;
+    var n = points.length;
+    var coords = points.map(function (p, i) {
+      var x = padL + (n === 1 ? 0 : (i / (n - 1)) * plotW);
+      var y = padT + (1 - (p.value - min) / range) * plotH;
+      return { x: x, y: y };
+    });
+    var linePath = coords.map(function (c, i) { return (i === 0 ? "M" : "L") + c.x.toFixed(1) + " " + c.y.toFixed(1); }).join(" ");
+    var areaPath = linePath +
+      " L " + coords[n - 1].x.toFixed(1) + " " + (padT + plotH).toFixed(1) +
+      " L " + coords[0].x.toFixed(1) + " " + (padT + plotH).toFixed(1) + " Z";
+    var gid = "grad" + Math.random().toString(36).slice(2, 8);
+    var gridLines = [0, 0.5, 1].map(function (t) {
+      var y = (padT + t * plotH).toFixed(1);
+      return '<line x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '" stroke="var(--line)" stroke-width="1"/>';
+    }).join("");
+    var dots = coords.slice(0, n - 1).map(function (c) {
+      return '<circle cx="' + c.x.toFixed(1) + '" cy="' + c.y.toFixed(1) + '" r="2.5" fill="var(--surface)" stroke="' + stroke + '" stroke-width="1.5"/>';
+    }).join("");
+    var last = coords[n - 1];
+    var svg =
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" class="trend-svg" role="img" aria-hidden="true">' +
+      '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="' + stroke + '" stop-opacity="0.22"/>' +
+      '<stop offset="100%" stop-color="' + stroke + '" stop-opacity="0"/>' +
+      '</linearGradient></defs>' +
+      gridLines +
+      '<path d="' + areaPath + '" fill="url(#' + gid + ')" stroke="none"/>' +
+      '<path d="' + linePath + '" fill="none" stroke="' + stroke + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      dots +
+      '<circle cx="' + last.x.toFixed(1) + '" cy="' + last.y.toFixed(1) + '" r="4.5" fill="' + stroke + '"/>' +
+      '</svg>';
+    return svg;
+  }
+
+  function renderTrendChart(container, points, unitSuffix, colorVar) {
+    container.innerHTML = "";
+    if (points.length < 2) {
+      var empty = document.createElement("p");
+      empty.className = "chart-empty";
+      empty.textContent = "Log a couple more sessions to see the trend.";
+      container.appendChild(empty);
+      return;
+    }
+    var svg = buildTrendSVG(points, colorVar);
+    var wrap = document.createElement("div");
+    wrap.className = "trend-chart";
+
+    var top = document.createElement("div");
+    top.className = "trend-top";
+    var val = document.createElement("span");
+    val.className = "trend-value";
+    if (colorVar) val.style.color = "var(" + colorVar + ")";
+    val.textContent = points[points.length - 1].value + " " + unitSuffix;
+    top.appendChild(val);
+    wrap.appendChild(top);
+
+    var svgHolder = document.createElement("div");
+    svgHolder.innerHTML = svg;
+    wrap.appendChild(svgHolder);
+
+    var axis = document.createElement("div");
+    axis.className = "trend-axis";
+    var a = document.createElement("span"); a.textContent = fmtDateShort(points[0].label);
+    var b = document.createElement("span"); b.textContent = fmtDateShort(points[points.length - 1].label);
+    axis.appendChild(a); axis.appendChild(b);
+    wrap.appendChild(axis);
+
+    container.appendChild(wrap);
+  }
+
+  function exerciseChartPoints(name) {
+    var raw = [];
+    state.history.forEach(function (session) {
+      session.entries.forEach(function (entry) {
+        if (entry.name !== name) return;
+        var maxKg = 0;
+        entry.sets.forEach(function (s) {
+          if (!s.done) return;
+          var w = normalizedSetWeight(s);
+          if (w > maxKg) maxKg = w;
+        });
+        if (maxKg > 0) raw.push({ date: session.date, kg: maxKg });
+      });
+    });
+    raw.sort(function (a, b) { return a.date.localeCompare(b.date); });
+    return raw.map(function (p) { return { label: p.date, value: round1(kgToUnit(p.kg)) }; });
+  }
+
+  /* ---------- toast ---------- */
+
+  function showPrToast(exerciseName, kg) {
+    var stack = document.getElementById("toastStack");
+    var toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = "🏆 New PR — " + escapeHtml(exerciseName) + " <b>" + fmtWeight(kg) + " " + unitLabel() + "</b>";
+    stack.appendChild(toast);
+    setTimeout(function () {
+      toast.style.opacity = "0";
+      toast.style.transition = "opacity 0.3s";
+      setTimeout(function () { toast.remove(); }, 320);
+    }, 2800);
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* ---------- exercises ---------- */
+
+  function renderExercises() {
+    var routine = getRoutine(state.activeRoutine);
+    var list = document.getElementById("exerciseList");
+    var restCard = document.getElementById("restCard");
+    var colLabels = document.getElementById("colLabels");
+    var finishRow = document.getElementById("finishRow");
+    var calorieRow = document.getElementById("calorieRow");
+    var noteRow = document.getElementById("noteRow");
+    list.innerHTML = "";
+
+    var isRestDay = routine.exercises.length === 0 && !editing;
+    restCard.innerHTML = isRestDay
+      ? '<div class="rest-card"><div class="rest-title">Rest day</div><p>No exercises scheduled. Recovery is part of the plan — or hit the pencil icon to add something.</p></div>'
+      : "";
+    colLabels.style.display = isRestDay ? "none" : "grid";
+    finishRow.style.display = isRestDay ? "none" : "flex";
+    calorieRow.style.display = isRestDay ? "none" : "flex";
+    noteRow.style.display = isRestDay ? "none" : "flex";
+    document.getElementById("calorieInput").value = getDraftCalories(routine.id);
+    document.getElementById("noteInput").value = getDraftNote(routine.id);
+
+    routine.exercises.forEach(function (ex) {
+      var draft = getDraft(routine.id, ex.id, ex.sets);
+      var card = document.createElement("div");
+      card.className = "exercise";
+
+      var head = document.createElement("div");
+      head.className = "ex-head";
+
+      var nameWrap = document.createElement("div");
+      var nameEl;
+      if (editing) {
+        nameEl = document.createElement("input");
+        nameEl.type = "text";
+        nameEl.className = "ex-name-input";
+        nameEl.maxLength = 40;
+        nameEl.value = ex.name;
+        nameEl.setAttribute("aria-label", "Rename exercise");
+        nameEl.addEventListener("input", function () {
+          ex.name = nameEl.value;
+          saveState();
+        });
+      } else {
+        nameEl = document.createElement("div");
+        nameEl.className = "ex-name";
+        nameEl.textContent = ex.name;
+      }
+      nameWrap.appendChild(nameEl);
+
+      if (ex.kcal) {
+        var kcalEl = document.createElement("div");
+        kcalEl.className = "ex-kcal";
+        kcalEl.textContent = "~" + ex.kcal + " kcal est.";
+        nameWrap.appendChild(kcalEl);
+      }
+
+      var meta = document.createElement("div");
+      meta.className = "ex-meta";
+      var chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = ex.sets + "×" + ex.reps;
+      meta.appendChild(chip);
+
+      var lt = lastTimeFor(ex.name);
+      var ltEl = document.createElement("span");
+      ltEl.className = "last-time";
+      if (lt) {
+        ltEl.innerHTML = "last <b>" + fmtWeight(lt.weight) + " " + unitLabel() + "</b>";
+      } else {
+        ltEl.textContent = "no history yet";
+      }
+      meta.appendChild(ltEl);
+
+      var pr = bestEverFor(ex.name);
+      if (pr) {
+        var prEl = document.createElement("span");
+        prEl.className = "pr-note";
+        prEl.innerHTML = "PR <b>" + fmtWeight(pr.weight) + " " + unitLabel() + "</b>";
+        meta.appendChild(prEl);
+      }
+
+      var lastEntry = lastSessionEntryFor(ex.name);
+      if (lastEntry) {
+        var fillBtn = document.createElement("button");
+        fillBtn.className = "chip chip-action";
+        fillBtn.type = "button";
+        fillBtn.textContent = "↻ Same as last time";
+        fillBtn.addEventListener("click", function () {
+          lastEntry.sets.forEach(function (s, idx) {
+            if (idx >= draft.length) return;
+            if (weightOf(s.weight) > 0) draft[idx].weight = fmtWeight(weightOf(s.weight));
+            if (s.reps) draft[idx].reps = String(s.reps);
+          });
+          saveState();
+          renderExercises();
+        });
+        meta.appendChild(fillBtn);
+      }
+
+      nameWrap.appendChild(meta);
+      head.appendChild(nameWrap);
+
+      var actions = document.createElement("div");
+      actions.className = "ex-actions";
+
+      var chartBtn = document.createElement("button");
+      chartBtn.className = "chart-toggle" + (expandedCharts[ex.name] ? " active" : "");
+      chartBtn.innerHTML = chartIcon();
+      chartBtn.setAttribute("aria-label", "Toggle progress chart for " + ex.name);
+      chartBtn.setAttribute("aria-pressed", expandedCharts[ex.name] ? "true" : "false");
+      chartBtn.addEventListener("click", function () {
+        expandedCharts[ex.name] = !expandedCharts[ex.name];
+        renderExercises();
+      });
+      actions.appendChild(chartBtn);
+
+      if (editing) {
+        var rm = document.createElement("button");
+        rm.className = "remove-ex";
+        rm.textContent = "Remove";
+        rm.addEventListener("click", function () {
+          routine.exercises = routine.exercises.filter(function (e) { return e.id !== ex.id; });
+          delete state.draft[draftKey(routine.id)][ex.id];
+          saveState();
+          renderAll();
+        });
+        actions.appendChild(rm);
+      }
+      head.appendChild(actions);
+
+      card.appendChild(head);
+
+      var setsWrap = document.createElement("div");
+      setsWrap.className = "sets";
+
+      draft.forEach(function (setEntry, idx) {
+        var label = document.createElement("div");
+        label.className = "set-label";
+        label.textContent = idx + 1;
+        setsWrap.appendChild(label);
+
+        var weightInput = document.createElement("input");
+        weightInput.type = "number";
+        weightInput.inputMode = "decimal";
+        weightInput.placeholder = lt ? fmtWeight(lt.weight) : "0";
+        weightInput.value = setEntry.weight;
+        weightInput.setAttribute("aria-label", ex.name + " set " + (idx + 1) + " weight");
+        weightInput.addEventListener("input", function () {
+          setEntry.weight = weightInput.value;
+          saveState();
+        });
+        setsWrap.appendChild(weightInput);
+
+        var repsInput = document.createElement("input");
+        repsInput.type = "number";
+        repsInput.inputMode = "numeric";
+        repsInput.placeholder = String(ex.reps);
+        repsInput.value = setEntry.reps;
+        repsInput.setAttribute("aria-label", ex.name + " set " + (idx + 1) + " reps");
+        repsInput.addEventListener("input", function () {
+          setEntry.reps = repsInput.value;
+          saveState();
+        });
+        setsWrap.appendChild(repsInput);
+
+        var check = document.createElement("button");
+        check.className = "set-check" + (setEntry.done ? " done" : "");
+        check.innerHTML = checkIcon();
+        check.setAttribute("aria-label", "Mark set " + (idx + 1) + " of " + ex.name + " done");
+        check.setAttribute("aria-pressed", setEntry.done ? "true" : "false");
+        check.addEventListener("click", function () {
+          var wasDone = setEntry.done;
+          setEntry.done = !setEntry.done;
+          if (setEntry.done && !setEntry.reps) setEntry.reps = String(ex.reps);
+
+          if (setEntry.done && !wasDone) {
+            var histBest = bestEverFor(ex.name);
+            var priorBest = histBest ? histBest.weight : 0;
+            draft.forEach(function (other) {
+              if (other === setEntry || !other.done) return;
+              var ow = unitToKg(weightOf(other.weight));
+              if (ow > priorBest) priorBest = ow;
+            });
+            var thisKg = unitToKg(weightOf(setEntry.weight));
+            if (thisKg > 0 && thisKg > priorBest) showPrToast(ex.name, thisKg);
+            if (!wasDone && routine.type !== "rest") startRestTimer(state.restDurationSec || 60);
+          }
+
+          saveState();
+          renderExercises();
+          renderStats();
+        });
+        setsWrap.appendChild(check);
+      });
+
+      card.appendChild(setsWrap);
+
+      if (expandedCharts[ex.name]) {
+        var chartHolder = document.createElement("div");
+        chartHolder.className = "exercise-chart";
+        card.appendChild(chartHolder);
+        renderTrendChart(chartHolder, exerciseChartPoints(ex.name), unitLabel());
+      }
+
+      list.appendChild(card);
+    });
+
+    document.getElementById("addExerciseBtn").style.display = editing ? "block" : "none";
+    document.getElementById("addExerciseBtn").textContent = "+ Add exercise to " + routine.name;
+    if (!editing) {
+      addFormOpen = false;
+      document.getElementById("addForm").style.display = "none";
+    }
+  }
+
+  function renderAddForm() {
+    var wrap = document.getElementById("addForm");
+    if (!addFormOpen) { wrap.style.display = "none"; wrap.innerHTML = ""; return; }
+    wrap.style.display = "block";
+    wrap.innerHTML =
+      '<div class="add-form">' +
+        '<input type="text" id="newExName" placeholder="Exercise name">' +
+        '<div class="row">' +
+          '<input type="number" id="newExSets" placeholder="Sets" value="3">' +
+          '<input type="number" id="newExReps" placeholder="Reps" value="10">' +
+        '</div>' +
+        '<div class="btns">' +
+          '<button class="btn btn-ghost" id="cancelAddEx">Cancel</button>' +
+          '<button class="btn btn-primary" id="confirmAddEx">Add</button>' +
+        '</div>' +
+      '</div>';
+    document.getElementById("newExName").focus();
+    document.getElementById("cancelAddEx").addEventListener("click", function () {
+      addFormOpen = false;
+      renderAddForm();
+    });
+    document.getElementById("confirmAddEx").addEventListener("click", function () {
+      var name = document.getElementById("newExName").value.trim();
+      var sets = parseInt(document.getElementById("newExSets").value, 10) || 3;
+      var reps = parseInt(document.getElementById("newExReps").value, 10) || 10;
+      if (!name) { document.getElementById("newExName").focus(); return; }
+      var routine = getRoutine(state.activeRoutine);
+      routine.exercises.push({ id: uid("ex"), name: name, sets: sets, reps: reps });
+      addFormOpen = false;
+      saveState();
+      renderAll();
+    });
+  }
+
+  /* ---------- history ---------- */
+
+  function renderHistory() {
+    var wrap = document.getElementById("historyList");
+    wrap.innerHTML = "";
+    if (!state.history.length) {
+      wrap.innerHTML = '<p class="empty-hist">Finish a workout to start your log.</p>';
+      return;
+    }
+    var recent = state.history.slice().reverse().slice(0, 8);
+    recent.forEach(function (s) {
+      var row = document.createElement("div");
+      row.className = "history-item";
+
+      var left = document.createElement("div");
+      var routineEl = document.createElement("div");
+      routineEl.className = "hist-routine";
+      routineEl.textContent = s.routineName + (s.programName ? " · " + s.programName : "");
+      left.appendChild(routineEl);
+      var dateEl = document.createElement("div");
+      dateEl.className = "hist-date";
+      dateEl.textContent = fmtDate(s.date);
+      left.appendChild(dateEl);
+      if (s.note) {
+        var noteEl = document.createElement("div");
+        noteEl.className = "hist-note";
+        noteEl.textContent = "“" + s.note + "”";
+        left.appendChild(noteEl);
+      }
+      row.appendChild(left);
+
+      var right = document.createElement("div");
+      right.className = "hist-volume";
+      var volLine = Math.round(kgToUnit(s.volume || 0)) + " " + unitLabel() + " vol.";
+      right.appendChild(document.createTextNode(volLine));
+      if (s.calories) {
+        right.appendChild(document.createElement("br"));
+        right.appendChild(document.createTextNode(Math.round(s.calories) + " kcal"));
+      }
+      row.appendChild(right);
+
+      wrap.appendChild(row);
+    });
+  }
+
+  /* ---------- body weight ---------- */
+
+  function sortedBodyWeight() {
+    return state.bodyWeight.slice().sort(function (a, b) { return a.date.localeCompare(b.date); });
+  }
+
+  function renderWeightSummary() {
+    var el = document.getElementById("weightSummary");
+    el.innerHTML = "";
+    var sorted = sortedBodyWeight();
+    if (!sorted.length) return;
+    var latest = sorted[sorted.length - 1];
+    var prev = sorted.length > 1 ? sorted[sorted.length - 2] : null;
+
+    var big = document.createElement("div");
+    big.className = "weight-latest";
+    var num = document.createElement("span");
+    num.className = "weight-num";
+    num.textContent = fmtWeight(latest.weight) + " " + unitLabel();
+    big.appendChild(num);
+
+    if (prev) {
+      var deltaKg = latest.weight - prev.weight;
+      var deltaDisplay = round1(kgToUnit(deltaKg));
+      var cls = deltaDisplay > 0 ? "up" : (deltaDisplay < 0 ? "down" : "flat");
+      var sign = deltaDisplay > 0 ? "+" : (deltaDisplay < 0 ? "−" : "");
+      var delta = document.createElement("span");
+      delta.className = "weight-delta " + cls;
+      delta.textContent = sign + fmtWeight(Math.abs(deltaKg)) + " " + unitLabel() + " since last";
+      big.appendChild(delta);
+    }
+
+    var bmi = computeBMI(latest.weight);
+    if (bmi) {
+      var badge = document.createElement("span");
+      badge.className = "bmi-badge " + bmi.tone;
+      badge.textContent = "BMI " + bmi.value.toFixed(1) + " · " + bmi.label;
+      big.appendChild(badge);
+    }
+
+    el.appendChild(big);
+  }
+
+  function computeBMI(latestWeightKg) {
+    var h = state.profile && state.profile.heightCm;
+    if (!h || h <= 0 || !latestWeightKg) return null;
+    var hm = h / 100;
+    var bmi = latestWeightKg / (hm * hm);
+    var label, tone;
+    if (bmi < 18.5) { label = "Underweight"; tone = "under"; }
+    else if (bmi < 25) { label = "Normal"; tone = "normal"; }
+    else if (bmi < 30) { label = "Overweight"; tone = "over"; }
+    else { label = "Obese"; tone = "obese"; }
+    return { value: bmi, label: label, tone: tone };
+  }
+
+  function renderProfileSection() {
+    document.getElementById("profileName").value = state.profile.name || "";
+    document.getElementById("profileHeight").value = state.profile.heightCm || "";
+    document.getElementById("profileAge").value = state.profile.age || "";
+  }
+
+  function renderWeightChart() {
+    var el = document.getElementById("weightChart");
+    var sorted = sortedBodyWeight();
+    var points = sorted.map(function (p) { return { label: p.date, value: round1(kgToUnit(p.weight)) }; });
+    if (!points.length) { el.innerHTML = ""; return; }
+    renderTrendChart(el, points, unitLabel(), "--vital");
+  }
+
+  function renderWeightList() {
+    var wrap = document.getElementById("weightList");
+    wrap.innerHTML = "";
+    var sorted = sortedBodyWeight().slice().reverse().slice(0, 6);
+    if (!sorted.length) {
+      wrap.innerHTML = '<p class="empty-hist">No entries yet. Log your weight to start a trend.</p>';
+      return;
+    }
+    sorted.forEach(function (entry) {
+      var row = document.createElement("div");
+      row.className = "weight-item";
+      var d = document.createElement("span");
+      d.className = "w-date";
+      d.textContent = fmtDate(entry.date);
+      var v = document.createElement("span");
+      v.className = "w-val";
+      v.textContent = fmtWeight(entry.weight) + " " + unitLabel();
+      row.appendChild(d);
+      row.appendChild(v);
+      wrap.appendChild(row);
+    });
+  }
+
+  function renderWeightForm() {
+    var wrap = document.getElementById("weightForm");
+    if (!weightFormOpen) { wrap.style.display = "none"; wrap.innerHTML = ""; return; }
+    wrap.style.display = "block";
+    wrap.innerHTML = "";
+    var form = document.createElement("div");
+    form.className = "add-form";
+
+    var row = document.createElement("div");
+    row.className = "row";
+    row.style.gridTemplateColumns = "1fr 1fr";
+
+    var dateInput = document.createElement("input");
+    dateInput.type = "date";
+    dateInput.id = "newWeightDate";
+    dateInput.value = todayISO();
+    row.appendChild(dateInput);
+
+    var weightInput = document.createElement("input");
+    weightInput.type = "number";
+    weightInput.id = "newWeightVal";
+    weightInput.placeholder = unitLabel();
+    weightInput.step = "0.1";
+    row.appendChild(weightInput);
+
+    form.appendChild(row);
+
+    var btns = document.createElement("div");
+    btns.className = "btns";
+    var cancel = document.createElement("button");
+    cancel.className = "btn btn-ghost";
+    cancel.textContent = "Cancel";
+    cancel.addEventListener("click", function () { weightFormOpen = false; renderWeightForm(); });
+    var save = document.createElement("button");
+    save.className = "btn btn-primary";
+    save.textContent = "Save";
+    save.addEventListener("click", function () {
+      var date = dateInput.value || todayISO();
+      var val = parseFloat(weightInput.value);
+      if (!val || val <= 0) { weightInput.focus(); return; }
+      var kg = unitToKg(val);
+      var existingIdx = state.bodyWeight.findIndex(function (e) { return e.date === date; });
+      if (existingIdx >= 0) state.bodyWeight[existingIdx] = { date: date, weight: kg };
+      else state.bodyWeight.push({ date: date, weight: kg });
+      weightFormOpen = false;
+      saveState();
+      renderBodyWeightSection();
+    });
+    btns.appendChild(cancel);
+    btns.appendChild(save);
+    form.appendChild(btns);
+    wrap.appendChild(form);
+    weightInput.focus();
+  }
+
+  function renderBodyWeightSection() {
+    renderWeightForm();
+    renderWeightSummary();
+    renderWeightChart();
+    renderWeightList();
+  }
+
+  /* ---------- body measurements ---------- */
+
+  var measureFormOpen = false;
+  var measureTypeFormOpen = false;
+
+  function sortedMeasurements(type) {
+    return (state.measurements[type] || []).slice().sort(function (a, b) { return a.date.localeCompare(b.date); });
+  }
+
+  function renderMeasureTypeRow() {
+    var wrap = document.getElementById("measureTypeRow");
+    wrap.innerHTML = "";
+    state.measurementTypes.forEach(function (t) {
+      var pill = document.createElement("button");
+      pill.className = "program-pill" + (t === state.activeMeasurementType ? " active" : "");
+      pill.textContent = t;
+      pill.addEventListener("click", function () {
+        state.activeMeasurementType = t;
+        saveState();
+        renderMeasurementsSection();
+      });
+      wrap.appendChild(pill);
+    });
+    var addPill = document.createElement("button");
+    addPill.className = "program-pill program-pill-add";
+    addPill.textContent = "+ Type";
+    addPill.addEventListener("click", function () {
+      measureTypeFormOpen = true;
+      renderMeasureTypeForm();
+    });
+    wrap.appendChild(addPill);
+
+    var editRow = document.getElementById("measureTypeEditRow");
+    editRow.innerHTML = "";
+    if (editing) {
+      editRow.style.display = "flex";
+      if (state.measurementTypes.length > 1) {
+        var del = document.createElement("button");
+        del.className = "remove-ex";
+        del.textContent = "Delete “" + state.activeMeasurementType + "”";
+        del.addEventListener("click", function () {
+          var t = state.activeMeasurementType;
+          state.measurementTypes = state.measurementTypes.filter(function (x) { return x !== t; });
+          delete state.measurements[t];
+          state.activeMeasurementType = state.measurementTypes[0];
+          saveState();
+          renderMeasurementsSection();
+        });
+        editRow.appendChild(del);
+      }
+    } else {
+      editRow.style.display = "none";
+    }
+  }
+
+  function renderMeasureTypeForm() {
+    var wrap = document.getElementById("measureTypeForm");
+    if (!measureTypeFormOpen) { wrap.style.display = "none"; wrap.innerHTML = ""; return; }
+    wrap.style.display = "block";
+    wrap.innerHTML = "";
+    var form = document.createElement("div");
+    form.className = "add-form";
+    var input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Measurement (e.g. Thighs)";
+    form.appendChild(input);
+    var btns = document.createElement("div");
+    btns.className = "btns";
+    var cancel = document.createElement("button");
+    cancel.className = "btn btn-ghost";
+    cancel.textContent = "Cancel";
+    cancel.addEventListener("click", function () { measureTypeFormOpen = false; renderMeasureTypeForm(); });
+    var confirm = document.createElement("button");
+    confirm.className = "btn btn-primary";
+    confirm.textContent = "Add";
+    confirm.addEventListener("click", function () {
+      var name = input.value.trim();
+      if (!name) { input.focus(); return; }
+      if (state.measurementTypes.indexOf(name) === -1) state.measurementTypes.push(name);
+      if (!Array.isArray(state.measurements[name])) state.measurements[name] = [];
+      state.activeMeasurementType = name;
+      measureTypeFormOpen = false;
+      saveState();
+      renderMeasurementsSection();
+    });
+    btns.appendChild(cancel);
+    btns.appendChild(confirm);
+    form.appendChild(btns);
+    wrap.appendChild(form);
+    input.focus();
+  }
+
+  function renderMeasureSummary() {
+    var el = document.getElementById("measureSummary");
+    el.innerHTML = "";
+    var sorted = sortedMeasurements(state.activeMeasurementType);
+    if (!sorted.length) return;
+    var latest = sorted[sorted.length - 1];
+    var prev = sorted.length > 1 ? sorted[sorted.length - 2] : null;
+
+    var big = document.createElement("div");
+    big.className = "weight-latest";
+    var num = document.createElement("span");
+    num.className = "weight-num";
+    num.textContent = round1(latest.value) + " cm";
+    big.appendChild(num);
+
+    if (prev) {
+      var d = round1(latest.value - prev.value);
+      var cls = d > 0 ? "up" : (d < 0 ? "down" : "flat");
+      var sign = d > 0 ? "+" : (d < 0 ? "−" : "");
+      var delta = document.createElement("span");
+      delta.className = "weight-delta " + cls;
+      delta.textContent = sign + round1(Math.abs(d)) + " cm since last";
+      big.appendChild(delta);
+    }
+    el.appendChild(big);
+  }
+
+  function renderMeasureChart() {
+    var el = document.getElementById("measureChart");
+    var points = sortedMeasurements(state.activeMeasurementType).map(function (p) {
+      return { label: p.date, value: round1(p.value) };
+    });
+    if (!points.length) { el.innerHTML = ""; return; }
+    renderTrendChart(el, points, "cm", "--vital");
+  }
+
+  function renderMeasureList() {
+    var wrap = document.getElementById("measureList");
+    wrap.innerHTML = "";
+    var sorted = sortedMeasurements(state.activeMeasurementType).slice().reverse().slice(0, 6);
+    if (!sorted.length) {
+      wrap.innerHTML = '<p class="empty-hist">No entries yet for ' + escapeHtml(state.activeMeasurementType) + '.</p>';
+      return;
+    }
+    sorted.forEach(function (entry) {
+      var row = document.createElement("div");
+      row.className = "weight-item";
+      var d = document.createElement("span");
+      d.className = "w-date";
+      d.textContent = fmtDate(entry.date);
+      var v = document.createElement("span");
+      v.className = "w-val";
+      v.textContent = round1(entry.value) + " cm";
+      row.appendChild(d);
+      row.appendChild(v);
+      wrap.appendChild(row);
+    });
+  }
+
+  function renderMeasureForm() {
+    var wrap = document.getElementById("measureForm");
+    if (!measureFormOpen) { wrap.style.display = "none"; wrap.innerHTML = ""; return; }
+    wrap.style.display = "block";
+    wrap.innerHTML = "";
+    var form = document.createElement("div");
+    form.className = "add-form";
+
+    var row = document.createElement("div");
+    row.className = "row";
+    row.style.gridTemplateColumns = "1fr 1fr";
+
+    var dateInput = document.createElement("input");
+    dateInput.type = "date";
+    dateInput.value = todayISO();
+    row.appendChild(dateInput);
+
+    var valInput = document.createElement("input");
+    valInput.type = "number";
+    valInput.placeholder = "cm";
+    valInput.step = "0.1";
+    row.appendChild(valInput);
+
+    form.appendChild(row);
+
+    var btns = document.createElement("div");
+    btns.className = "btns";
+    var cancel = document.createElement("button");
+    cancel.className = "btn btn-ghost";
+    cancel.textContent = "Cancel";
+    cancel.addEventListener("click", function () { measureFormOpen = false; renderMeasureForm(); });
+    var save = document.createElement("button");
+    save.className = "btn btn-primary";
+    save.textContent = "Save";
+    save.addEventListener("click", function () {
+      var date = dateInput.value || todayISO();
+      var val = parseFloat(valInput.value);
+      if (!val || val <= 0) { valInput.focus(); return; }
+      var type = state.activeMeasurementType;
+      var list = state.measurements[type];
+      var existingIdx = list.findIndex(function (e) { return e.date === date; });
+      if (existingIdx >= 0) list[existingIdx] = { date: date, value: val };
+      else list.push({ date: date, value: val });
+      measureFormOpen = false;
+      saveState();
+      renderMeasurementsSection();
+    });
+    btns.appendChild(cancel);
+    btns.appendChild(save);
+    form.appendChild(btns);
+    wrap.appendChild(form);
+    valInput.focus();
+  }
+
+  function renderMeasurementsSection() {
+    renderMeasureTypeRow();
+    renderMeasureTypeForm();
+    renderMeasureForm();
+    renderMeasureSummary();
+    renderMeasureChart();
+    renderMeasureList();
+  }
+
+  /* ---------- rest timer ---------- */
+
+  function fmtClock(sec) {
+    sec = Math.max(0, sec);
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  function pauseIconSvg() {
+    return '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  }
+  function playIconSvg() {
+    return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  }
+
+  function renderTimerBar() {
+    document.getElementById("timerDisplay").textContent = fmtClock(restTimer.remaining);
+    document.getElementById("timerPauseBtn").innerHTML = restTimer.running ? pauseIconSvg() : playIconSvg();
+    document.getElementById("timerPauseBtn").setAttribute("aria-label", restTimer.running ? "Pause timer" : "Resume timer");
+    document.getElementById("restTimerBar").classList.toggle("done", restTimer.remaining <= 0);
+  }
+
+  function tickTimer() {
+    if (!restTimer.running) return;
+    restTimer.remaining--;
+    renderTimerBar();
+    if (restTimer.remaining <= 0) {
+      clearInterval(restTimer.intervalId);
+      restTimer.running = false;
+      renderTimerBar();
+      playBeep();
+      setTimeout(hideTimerBar, 5000);
+    }
+  }
+
+  function startRestTimer(seconds) {
+    clearInterval(restTimer.intervalId);
+    restTimer.remaining = seconds;
+    restTimer.running = true;
+    document.getElementById("restTimerBar").classList.add("visible");
+    renderTimerBar();
+    restTimer.intervalId = setInterval(tickTimer, 1000);
+  }
+
+  function hideTimerBar() {
+    document.getElementById("restTimerBar").classList.remove("visible");
+  }
+
+  function playBeep() {
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      var ctx = new Ctx();
+      function beep(delay, freq) {
+        setTimeout(function () {
+          var o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = "sine";
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.0001, ctx.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.28, ctx.currentTime + 0.01);
+          g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+          o.connect(g); g.connect(ctx.destination);
+          o.start();
+          o.stop(ctx.currentTime + 0.42);
+        }, delay);
+      }
+      beep(0, 880);
+      beep(220, 1040);
+    } catch (e) { /* audio not available */ }
+  }
+
+  /* ---------- render all ---------- */
+
+  function renderAll() {
+    document.getElementById("todayLabel").textContent = fmtDate(todayISO());
+    renderProgramRow();
+    renderProgramForm();
+    renderTabs();
+    renderDaySubtitle();
+    renderExercises();
+    renderAddForm();
+    renderHistory();
+    renderProfileSection();
+    renderBodyWeightSection();
+    renderMeasurementsSection();
+    renderStats();
+  }
+
+  /* ---------- static event wiring ---------- */
+
+  document.getElementById("editToggle").addEventListener("click", function () {
+    editing = !editing;
+    this.classList.toggle("active", editing);
+    this.setAttribute("aria-pressed", editing ? "true" : "false");
+    renderProgramRow();
+    renderDaySubtitle();
+    renderExercises();
+    renderAddForm();
+    renderMeasureTypeRow();
+  });
+
+  document.getElementById("unitToggle").addEventListener("click", function () {
+    state.unit = state.unit === "lb" ? "kg" : "lb";
+    saveState();
+    renderAll();
+  });
+
+  document.getElementById("addExerciseBtn").addEventListener("click", function () {
+    addFormOpen = true;
+    renderAddForm();
+  });
+
+  document.getElementById("addWeightBtn").addEventListener("click", function () {
+    weightFormOpen = true;
+    renderWeightForm();
+  });
+
+  document.getElementById("addMeasureBtn").addEventListener("click", function () {
+    measureFormOpen = true;
+    renderMeasureForm();
+  });
+
+  document.getElementById("calorieInput").addEventListener("input", function () {
+    setDraftCalories(state.activeRoutine, this.value);
+    saveState();
+  });
+
+  document.getElementById("noteInput").addEventListener("input", function () {
+    setDraftNote(state.activeRoutine, this.value);
+    saveState();
+  });
+
+  document.getElementById("profileName").addEventListener("input", function () {
+    state.profile.name = this.value;
+    saveState();
+  });
+  document.getElementById("profileHeight").addEventListener("input", function () {
+    state.profile.heightCm = parseFloat(this.value) || 0;
+    saveState();
+    renderWeightSummary();
+  });
+  document.getElementById("profileAge").addEventListener("input", function () {
+    state.profile.age = parseInt(this.value, 10) || 0;
+    saveState();
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    var routine = getRoutine(state.activeRoutine);
+    state.draft[draftKey(routine.id)] = {};
+    setDraftCalories(routine.id, "");
+    setDraftNote(routine.id, "");
+    routine.exercises.forEach(function (ex) { getDraft(routine.id, ex.id, ex.sets); });
+    saveState();
+    renderExercises();
+  });
+
+  document.getElementById("finishBtn").addEventListener("click", function () {
+    var routine = getRoutine(state.activeRoutine);
+    var prog = activeProgram();
+    var entries = [];
+    var volume = 0;
+    var anyDone = false;
+    var calories = parseFloat(getDraftCalories(routine.id)) || 0;
+    var note = getDraftNote(routine.id).trim();
+
+    routine.exercises.forEach(function (ex) {
+      var draft = getDraft(routine.id, ex.id, ex.sets);
+      var sets = draft.map(function (s) {
+        var wKg = unitToKg(weightOf(s.weight));
+        var r = parseInt(s.reps, 10) || 0;
+        if (s.done) {
+          anyDone = true;
+          volume += wKg * r;
+        }
+        return { weight: wKg, reps: r, done: s.done };
+      });
+      entries.push({ exerciseId: ex.id, name: ex.name, sets: sets });
+    });
+
+    if (!anyDone && calories <= 0) {
+      var btn = document.getElementById("finishBtn");
+      var original = btn.textContent;
+      btn.textContent = "Log a set or calories first";
+      setTimeout(function () { btn.textContent = original; }, 1800);
+      return;
+    }
+
+    var today = todayISO();
+    var existingIdx = -1;
+    state.history.forEach(function (s, i) {
+      if (s.date === today && s.routineId === routine.id && s.programId === prog.id) existingIdx = i;
+    });
+    var session = {
+      date: today,
+      programId: prog.id,
+      programName: prog.name,
+      routineId: routine.id,
+      routineName: routine.name,
+      entries: entries,
+      volume: volume,
+      calories: calories,
+      note: note
+    };
+    if (existingIdx >= 0) state.history[existingIdx] = session;
+    else state.history.push(session);
+
+    state.draft[draftKey(routine.id)] = {};
+    setDraftCalories(routine.id, "");
+    setDraftNote(routine.id, "");
+    routine.exercises.forEach(function (ex) { getDraft(routine.id, ex.id, ex.sets); });
+
+    saveState();
+    renderAll();
+  });
+
+  document.getElementById("timerToggle").addEventListener("click", function () {
+    startRestTimer(state.restDurationSec || 60);
+  });
+  document.getElementById("timerPauseBtn").addEventListener("click", function () {
+    if (restTimer.remaining <= 0) return;
+    restTimer.running = !restTimer.running;
+    if (restTimer.running) restTimer.intervalId = setInterval(tickTimer, 1000);
+    else clearInterval(restTimer.intervalId);
+    renderTimerBar();
+  });
+  document.getElementById("timerSkipBtn").addEventListener("click", function () {
+    clearInterval(restTimer.intervalId);
+    restTimer.running = false;
+    restTimer.remaining = 0;
+    hideTimerBar();
+  });
+  document.getElementById("timerMinus").addEventListener("click", function () {
+    restTimer.remaining = Math.max(0, restTimer.remaining - 15);
+    state.restDurationSec = Math.max(15, (state.restDurationSec || 60) - 15);
+    saveState();
+    renderTimerBar();
+  });
+  document.getElementById("timerPlus").addEventListener("click", function () {
+    restTimer.remaining += 15;
+    state.restDurationSec = (state.restDurationSec || 60) + 15;
+    saveState();
+    renderTimerBar();
+  });
+
+  /* ---------- backup / restore modal ---------- */
+
+  function openDataModal() {
+    document.getElementById("exportArea").value = JSON.stringify(state, null, 2);
+    document.getElementById("exportMsg").textContent = "";
+    document.getElementById("importMsg").textContent = "";
+    document.getElementById("dataModal").classList.add("open");
+  }
+  function closeDataModal() {
+    document.getElementById("dataModal").classList.remove("open");
+  }
+
+  document.getElementById("dataToggle").addEventListener("click", openDataModal);
+  document.getElementById("modalClose").addEventListener("click", closeDataModal);
+  document.getElementById("dataModal").addEventListener("click", function (e) {
+    if (e.target === this) closeDataModal();
+  });
+
+  document.getElementById("copyDataBtn").addEventListener("click", function () {
+    var area = document.getElementById("exportArea");
+    var msg = document.getElementById("exportMsg");
+    function ok() { msg.textContent = "Copied to clipboard."; msg.className = "modal-msg ok"; }
+    function fail() {
+      area.focus();
+      area.select();
+      try {
+        document.execCommand("copy");
+        ok();
+      } catch (e) {
+        msg.textContent = "Couldn't copy automatically — select the text and copy it manually.";
+        msg.className = "modal-msg err";
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(area.value).then(ok, fail);
+    } else {
+      fail();
+    }
+  });
+
+  document.getElementById("restoreDataBtn").addEventListener("click", function () {
+    var msg = document.getElementById("importMsg");
+    var text = document.getElementById("importArea").value.trim();
+    if (!text) { msg.textContent = "Paste your exported data first."; msg.className = "modal-msg err"; return; }
+    var parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch (e) {
+      msg.textContent = "That doesn't look like valid data (JSON parse failed).";
+      msg.className = "modal-msg err";
+      return;
+    }
+    if (!parsed || typeof parsed !== "object" || (!parsed.programs && !parsed.routines && !parsed.history && !parsed.bodyWeight)) {
+      msg.textContent = "That doesn't look like Iron Log data.";
+      msg.className = "modal-msg err";
+      return;
+    }
+    state = normalizeState(parsed);
+    saveState();
+    renderAll();
+    msg.textContent = "Restored.";
+    msg.className = "modal-msg ok";
+    setTimeout(closeDataModal, 900);
+  });
+
+  /* ---------- boot ---------- */
+
+  var header = document.getElementById("header");
+  window.addEventListener("scroll", function () {
+    header.classList.toggle("stuck", window.scrollY > 4);
+  });
+
+  renderAll();
+})();
+</script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () { /* offline support unavailable, app still works online */ });
+    });
+  }
+</script>
+
+</body>
+</html>
